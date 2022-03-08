@@ -3,6 +3,7 @@
 //INITIALISATION DE LA PAGE
 include("database.php");
 session_start();
+require "navmenu.php";
 
 ?>
 
@@ -10,14 +11,15 @@ session_start();
 <html lang="FR">
 <head>
     <meta charset="UTF-8">
-    <meta http-equiv="X-UA-Compatible" content="IE=edge">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <link rel="stylesheet" href="style.css">
+    <link rel="stylesheet" href="../css/style.css">
     <title>OpenEduc - Connexion </title>
 </head>
 <body>
     <div class="page_container">
 
+
+        <h1>Connexion</h1>
+        <br>
         <form action="" method="post">
             <input type="text" placeholder="Nom d'utilisateur" name="username">
             <input type="password" placeholder="password" name="password">

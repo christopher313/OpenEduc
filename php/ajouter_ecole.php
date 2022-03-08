@@ -1,16 +1,31 @@
+
 <?php
 
 //INITIALISATION DE LA PAGE
 include("database.php");
 session_start();
+require "navmenu.php";
 
 if($_SESSION['role'] == 1){?>
 
-<?php
-}
-else{
-    header("location:../index.php");
-}
-
-
+    <?php
+    }
+    else{
+        header("location:index.php");
+    }
+    
 ?>
+
+<!DOCTYPE html>
+<html lang="FR">
+<head>
+    <meta charset="UTF-8">
+    <link rel="stylesheet" href="../css/style.css">
+    <title>OpenEduc - Connexion </title>
+</head>
+<body>
+
+
+    
+</body>
+</html>
