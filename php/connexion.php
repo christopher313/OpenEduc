@@ -20,10 +20,10 @@ require "navmenu.php";
 
         <h1>Connexion</h1>
         <br>
-        <form action="" method="post">
-            <input type="text" placeholder="Nom d'utilisateur" name="username">
-            <input type="password" placeholder="password" name="password">
-            <input type="submit" value="Envoyer" name="bouton_envoie">
+        <form action="" method="post" class="formulaire_connexion">
+            <input class="champ" type="text" placeholder="Nom d'utilisateur ou email" name="username">
+            <input class="champ" type="password" placeholder="Mot de passe" name="password">
+            <input class="button" type="submit" value="Envoyer" name="bouton_envoie">
         </form>
 
         <?php 

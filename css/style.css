@@ -16,7 +16,6 @@
 .page_container{
     display: flex;
     flex-direction: column;
-    align-items: center;
     margin-left: 5%;
     margin-right: 5%;
 }
@@ -39,16 +38,115 @@
     margin: 50px;
 }
 
-button{
+.button{
+    display: flex;
     background-color: black;
     color:white;
     width: 200px;
     height: 60px;
     border-radius: 15px;
     font-size: 22px;
+    justify-content: center;
+    margin: 5px 5px 5px 5px;
+}
+
+.champ{
+    height: 40px;
+    width: 300px;
+    margin: 5px 5px 5px 5px;
+    text-align: center;
+}
+
+.formulaire_connexion{
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
 }
 
 
+.title-h1{
+    text-align: center;
+}
+
+
+#add-button{
+    width: 50px;
+    height: 50px;
+}
+
+.line_column{
+    display: flex;
+    flex-direction: row;
+    margin-top: 50px;
+}
+
+.column h2{
+    display: flex;
+    flex-direction: column;
+    background-color: black;
+    color: white;
+    width: 500px;
+    justify-content: flex-start;
+    text-align: center;
+    padding-top: 8px;
+    padding-bottom: 8px;
+}
+
+.column{
+    display: flex;
+    flex-direction: column;
+    width: 550px;
+    margin: 20px;
+    align-items: center;
+}
+
+.item-column{
+    display: flex;
+    flex-direction: column;
+    border: 1px solid black;
+    background-color: #BCB6B6;
+    width: 500px;
+    height: 400px;
+    box-shadow: rgba(149, 157, 165, 0.2) 0px 8px 24px;
+}
+
+.item-column ul{
+    display: flex;
+    flex-direction: column;
+    font-size: 20px;
+    text-align: center;
+    padding: 20px;
+}
+
+.item-column ul li{
+    padding: 8px;
+}
+
+.item-column ul li:hover{
+    background-color: darkslategrey;
+    color: white;
+}
+
+.item-button-column{
+    display: flex;
+    background-color: black;
+    width: 100px;
+    height: 100px;
+    color: white;
+    align-items: center;
+    align-content: center ;
+    text-align: center;
+    align-self: center;
+}
+
+.item-button-column a{
+    display: flex;
+    justify-content: center;
+    text-align: center;
+    align-self: center;
+
+}
 
 
 

@@ -46,7 +46,8 @@ li a{
 }
 
 li a:hover{
-  background-color: grey;
+  background-color: #272323 ;
+  border-radius: 15px;
 
 }
 
@@ -61,15 +62,18 @@ img{
 
 
 
+
 </style>
 </head>
 <body>
 
 <nav>
-    <img src="../img/Copie de OPEN.png">
+    <a href="index.php"><img src="../img/Copie de OPEN.png"></a>
     <ul>
     <?php
     if(isset($_SESSION['user'])){?>
+        <li><a href="dashboard.php"><?php echo $_SESSION['user'] ?><ion-icon name="person-circle-sharp"></ion-icon>
+</a></li>
         <li><a href="deconnexion.php">Deconnexion</a></li><?php
     }
     else{?>
@@ -84,6 +88,11 @@ img{
 
 
 <br/><br/><br/>
+
+
+
+<script type="module" src="https://unpkg.com/ionicons@5.5.2/dist/ionicons/ionicons.esm.js"></script>
+<script nomodule src="https://unpkg.com/ionicons@5.5.2/dist/ionicons/ionicons.js"></script>
 
 </body>
 </html>
