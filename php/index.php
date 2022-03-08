@@ -16,15 +16,16 @@ require "navmenu.php";
     <title>OpenEduc</title>
 </head>
 <body>
-    
     <div class="page_container">
-        <div class="block_container">
-            <h1 style="text-align:center;">Bienvenue sur la plateforme en ligne OpenEduc<h1>
+        <h1 class="title-h1">Bienvenue sur la plateforme OpenEduc</h1>
+        <div class="block-image-accueil">
+            <img id="img_accueil" src="../img/OPEN2.png"/>
+            <a class="button" href="#">Decouvrir plus</a>
         </div>
-        <div class="container_accueil">
-            <img src="../img/OPEN2" alt="logo OpenEduc" id="img_accueil">
-            <button onclick="window.location.href = 'deconnexion.php';">Decouvrir plus</button>
-        </div>
-    </div>
+         
+    
+
+
+    
 </body>
 </html>

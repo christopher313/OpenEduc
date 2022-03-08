@@ -4,7 +4,12 @@
 include("database.php");
 session_start();
 require "navmenu.php";
+$userid = $_SESSION['idUser'];
 
+$sql = "SELECT * FROM `createur` INNER JOIN ecole WHERE createur.cr_ecoId = ecole.eco_id AND cr_ctId = '$userid'";
+$recipesStatement = $db->prepare($sql);
+$recipesStatement->execute();
+$recipes = $recipesStatement->fetchAll();
 
 
 
@@ -28,13 +33,14 @@ require "navmenu.php";
 
                 <h2>MES ECOLES</h2>
                 <ul>
-                    <li>Ecole 1</li>
-                    <li>Ecole 2</li>
-                    <li>Ecole 3</li>
+                    <?php 
+                    foreach($recipes as $recipe){?>
+                        <li><a href="<?php echo 'page_ecole.php?id='.$recipe['eco_ref'] ?>"><?php echo $recipe['eco_nom']?></li><?php
+                    }?>
                 </ul>
             </div>
             <div class="item-button-column">
-                <a>+</a>
+                <a href="ajouter_ecole.php">+</a>
             </div>
         </div>
         <div class="column">
@@ -48,17 +54,6 @@ require "navmenu.php";
 
 
 
-
-<?php
-
-if($_SESSION['role'] == 1){?>
-    <button id="add-button" onclick="window.location.href = 'ajouter_ecole.php';"><ion-icon name="add-circle-sharp"></ion-icon></button><?php
-}
-
-
-?>
-<script type="module" src="https://unpkg.com/ionicons@5.5.2/dist/ionicons/ionicons.esm.js"></script>
-<script nomodule src="https://unpkg.com/ionicons@5.5.2/dist/ionicons/ionicons.js"></script>
 </body>
 </html>
 

@@ -18,13 +18,16 @@ require "navmenu.php";
     <div class="page_container">
 
 
-        <h1>Connexion</h1>
+        <h1 class="title-h1">Connexion</h1>
         <br>
+        <div class="content_connect">
+        <img id="ico" src="../img/OPEN2.png">
         <form action="" method="post" class="formulaire_connexion">
             <input class="champ" type="text" placeholder="Nom d'utilisateur ou email" name="username">
             <input class="champ" type="password" placeholder="Mot de passe" name="password">
-            <input class="button" type="submit" value="Envoyer" name="bouton_envoie">
+            <input class="button" type="submit" value="Se connecter" name="bouton_envoie">
         </form>
+        </div>
 
         <?php 
 
@@ -48,6 +51,7 @@ require "navmenu.php";
             $row_cnt = $recipesStatement->rowCount();
             if($row_cnt == 1){
                 session_start();
+                $_SESSION['idUser'] = $donnees['ct_id'];
                 $_SESSION['user'] = $user;
                 $_SESSION['role'] = $donnees['ct_role'];
                 header('location: dashboard.php');
