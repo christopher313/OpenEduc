@@ -19,7 +19,7 @@ require "navmenu.php";
 
     <div class="page_container">
 
-        <form action="" method="post" class="formulaire_connexion">
+        <form action="recherche_ecole.php" method="get" class="formulaire_connexion">
             <img src="../img/OPEN2.png" id="ico"/>
             <input type="text" placeholder="Ecrire ici..." name="search-bar" class="champ"/>
             <input type="submit" value="Rechercher" name="search-button" class="button"/>

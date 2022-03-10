@@ -4,14 +4,19 @@
 include("database.php");
 session_start();
 require "navmenu.php";
+if(isset($_SESSION['idUser'])){
+    $idSession = $_SESSION['idUser'];
+}
+else{
+    $idSession = '-1';
+}
 
 $ref = $_GET['id'];
-$sql = "SELECT * FROM `ecole` WHERE `eco_ref`= '$ref'";
+$sql = "SELECT * FROM `ecole` INNER JOIN `droits` ON droits.dr_ecoId=ecole.eco_id WHERE `eco_ref`= '$ref'";
 $recipesStatement = $db->prepare($sql);
 $recipesStatement->execute();
 $donnees = $recipesStatement->fetch(PDO::FETCH_ASSOC);
-
-
+$creatorId = $donnees['dr_creatorId'];
 
 $nomEcole = $donnees['eco_nom'];
 $adresseEcole = $donnees['eco_adresse'];
@@ -24,6 +29,25 @@ $delimiteur = 0;
 $ecoId = $donnees['eco_id'];
 $totalEffectif = 0;
 $boucle = 0;
+$idDroit = $donnees['dr_usrId'];
+
+
+
+$sql2 = "SELECT `ct_username` FROM `compte` WHERE `ct_id`= $creatorId";
+$recipesStatement2 = $db->prepare($sql2);
+$recipesStatement2->execute();
+$donnees2 = $recipesStatement2->fetch(PDO::FETCH_ASSOC);
+
+$sql3 = "SELECT * FROM `droits` WHERE `dr_usrId`= '$idSession' AND `dr_ecoId` = '$ecoId' ";
+$recipesStatement3 = $db->prepare($sql3);
+$recipesStatement3->execute();
+$row_cnt = $recipesStatement3->rowCount();
+
+
+$creatorName = $donnees2['ct_username'];
+
+
+
 
 
 for($i=0; $i<10; $i++){
@@ -70,10 +94,20 @@ $recipes = $recipesStatement->fetchAll();
         <div class="info-ecole-colonne">
             <p><strong>Année scolaire: </strong> 2021/22</p>
             <p><strong>Dernière mise à jour: </strong> 21-nov-21</p>
+            <p><strong>Administrateur: </strong><?php echo $creatorName?> </p>
         </div>
     </div>  
+    <?php
+
+
+
+    if($row_cnt>=1){?>
     <a href="ajouter_classe.php?id=<?php echo $ref ?>">Ajouter une classe</a>
     <a href="droits.php?id=<?php echo $ref ?>">Gérer les droits</a>
+    <?php  
+    }
+    ?>
+
     <br/>
     
     <table>

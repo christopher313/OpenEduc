@@ -35,7 +35,10 @@ $recipes = $recipesStatement->fetchAll();
                 <ul>
                     <?php 
                     foreach($recipes as $recipe){?>
-                        <li><a href="<?php echo 'page_ecole.php?id='.$recipe['eco_ref'] ?>"><?php echo $recipe['eco_nom']?>   <a href="<?php echo 'supprimer_ecole.php?id='.$recipe['eco_ref']?>" id="delete">X</a></li><?php
+                        <li><a href="<?php echo 'page_ecole.php?id='.$recipe['eco_ref'] ?>"><?php echo $recipe['eco_nom']?><?php
+                         if($recipe['dr_creatorId'] == $_SESSION['idUser'] ){?>
+                            <a href="<?php echo 'supprimer_ecole.php?id='.$recipe['eco_ref']?>" id="delete">X</a></li><?php
+                         }   
                     }?>
                 </ul>
             </div>

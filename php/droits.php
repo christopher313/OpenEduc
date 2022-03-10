@@ -50,9 +50,12 @@ $donnees_droit = $recipesStatement->fetchAll();
             foreach($donnees_droit as $donnee_droit){ ?>
             <tr>
                 <td><?php echo $donnee_droit['ct_username']?></td>
-                <td><a href="supprimer_droit.php?idDroit=<?php echo $donnee_droit['dr_id']?>&idEcole=<?php echo $ref ?>">X</a></td>
+                    <?php
+                    if($donnee_droit['dr_creatorId']== $_SESSION['idUser']){?>
+                        <td><a href="supprimer_droit.php?idDroit=<?php echo $donnee_droit['dr_id']?>&idEcole=<?php echo $ref ?>">X</a></td><?php
+                    }?>
+                    </td>
             </tr><?php
-
             }?>
             
 
