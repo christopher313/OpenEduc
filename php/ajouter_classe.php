@@ -29,13 +29,13 @@ $idEcole = $donnees['eco_id'];
 <head>
     <meta charset="UTF-8">
     <link rel="stylesheet" href="../css/style.css">
-    <title>OpenEduc - Connexion </title>
+    <title>OpenEduc - Ajouter une classe </title>
 </head>
 <body>
-    <h1 class="title-h1">Ajouter une classe pour <?php echo "INSERER NOM"?></h1>
+    <h1 class="title-h1">Ajouter une classe pour <?php echo $donnees['eco_nom'] ?></h1>
 
     <div class="page_container">
-        <form action="ajouter_classe_traitement.php" method="post" class="formulaire_connexion">
+        <form action="ajouter_classe_traitement.php?id=<?php echo $ref?>" method="post" class="formulaire_connexion">
             <div class="check-form">
             <label for="nameclasses">Choisir un niveau de classe:</label>
                 <select name="classes">
@@ -50,6 +50,13 @@ $idEcole = $donnees['eco_id'];
                     <option value="CM1/CM2">CM1/CM2</option>
                     <option value="CM2">CM2</option>
                 </select>
+            </div>
+            <br/>
+            <div class="radio_civilite">
+                <input type="radio" name="civilite" value="M">
+                <label for="M">M</label>
+                <input type="radio" name="civilite" value="Mme">
+                <label for="M">Mme</label>
             </div>
             <input class="champ" type="text" placeholder="Nom du professeur" name="nom_prof">
             <input class="champ" type="number" placeholder="Effectif" name="effectif">

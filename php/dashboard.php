@@ -6,7 +6,7 @@ session_start();
 require "navmenu.php";
 $userid = $_SESSION['idUser'];
 
-$sql = "SELECT * FROM `createur` INNER JOIN ecole WHERE createur.cr_ecoId = ecole.eco_id AND cr_ctId = '$userid'";
+$sql = "SELECT * FROM `droits` INNER JOIN ecole ON droits.dr_ecoId = ecole.eco_id WHERE dr_usrId = '$userid'";
 $recipesStatement = $db->prepare($sql);
 $recipesStatement->execute();
 $recipes = $recipesStatement->fetchAll();
@@ -35,7 +35,7 @@ $recipes = $recipesStatement->fetchAll();
                 <ul>
                     <?php 
                     foreach($recipes as $recipe){?>
-                        <li><a href="<?php echo 'page_ecole.php?id='.$recipe['eco_ref'] ?>"><?php echo $recipe['eco_nom']?></li><?php
+                        <li><a href="<?php echo 'page_ecole.php?id='.$recipe['eco_ref'] ?>"><?php echo $recipe['eco_nom']?>   <a href="<?php echo 'supprimer_ecole.php?id='.$recipe['eco_ref']?>" id="delete">X</a></li><?php
                     }?>
                 </ul>
             </div>

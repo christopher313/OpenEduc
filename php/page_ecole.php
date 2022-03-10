@@ -73,6 +73,7 @@ $recipes = $recipesStatement->fetchAll();
         </div>
     </div>  
     <a href="ajouter_classe.php?id=<?php echo $ref ?>">Ajouter une classe</a>
+    <a href="droits.php?id=<?php echo $ref ?>">Gérer les droits</a>
     <br/>
     
     <table>
@@ -80,6 +81,7 @@ $recipes = $recipesStatement->fetchAll();
             <td>Niveau(x)</td>
             <td>Professeur</td>
             <td>Effectifs</td>
+            <td></td>
         </tr>
 
         <?php 
@@ -88,6 +90,7 @@ $recipes = $recipesStatement->fetchAll();
             <td><?php echo $recipe['cl_idNiveau']?></td>
             <td><?php echo $recipe['cl_civilite'] . " " . $recipe['cl_nomProf']?></td>
             <td><?php echo $recipe['cl_effectif']?></td>
+            <td><a href="supprimer_classe.php?idClasse=<?php echo $recipe['cl_id']?>&idEcole=<?php echo $ref?>">X</a></td>
         </tr>
             <?php
             $totalEffectif = $totalEffectif + $recipe['cl_effectif'];

@@ -22,22 +22,26 @@ $ville = $_POST['school_city'];
 $mail = $_POST['school_mail'];
 $tel = $_POST['school_number'];
 $lien = $ref . ".php";
+$idUser = $_SESSION['idUser'];
+$idCreateur = $idUser;
+
 
 
 $sql = "INSERT INTO `ecole`(`eco_nom`, `eco_ref`, `eco_adresse`, `eco_cp`, `eco_ville`, `eco_mail`, `eco_tel`, `eco_lien`) VALUES (:nom , :ref, :adresse, :cp, :ville, :mail, :tel, :lien) ";
-$sql2 = "INSERT INTO `createur`(`cr_ctId`, `cr_ecoId`) VALUES (:idCreateur, :idEcole)";
+
 
 
 $res = $db->prepare($sql);
-$res2 = $db->prepare($sql2);
-
 $exec = $res->execute(array(":nom"=>$nom, ":ref"=>$ref, ":adresse"=>$adresse, ":cp"=>$cp, ":ville"=>$ville, ":mail"=>$mail, ":tel"=>$tel, ":lien"=>$lien));
 $last_id = $db->lastInsertId();
 
 if($exec){
     echo "Insertion réussie";
-    $exec2 = $res2->execute(array(":idCreateur"=>$_SESSION['idUser'], ":idEcole"=>$last_id));
-    file_put_contents($lien, '<?php include("database.php"); session_start(); require "navmenu.php"; ?>');
+    $sql = "INSERT INTO `droits`(`dr_creatorId`, `dr_usrId`, `dr_ecoId`) VALUES (:idCreateur, :idUtilisateur, :idEcole)";
+    $res = $db->prepare($sql);
+    $exec = $res->execute(array(":idCreateur"=>$idCreateur, ":idUtilisateur"=>$idUser, ":idEcole"=>$last_id));
+    echo $idUser ."et " . $last_id;
+    header('location: dashboard.php');
 }
 else{
     echo "Insertion echoué";
