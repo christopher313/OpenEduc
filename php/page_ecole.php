@@ -102,10 +102,11 @@ $recipes = $recipesStatement->fetchAll();
 
 
     if($row_cnt>=1){?>
-    <a href="ajouter_classe.php?id=<?php echo $ref ?>">Ajouter une classe</a>
-    <a href="droits.php?id=<?php echo $ref ?>">Gérer les droits</a>
-    <?php  
-    }
+        <a href="ajouter_classe.php?id=<?php echo $ref ?>">Ajouter une classe</a><?php
+        if($creatorId == $idSession){?>
+            <a href="droits.php?id=<?php echo $ref ?>">Gérer les droits</a><?php
+        }
+     }
     ?>
 
     <br/>

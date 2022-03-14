@@ -46,9 +46,7 @@ $recipes = $recipesStatement->fetchAll();
                 <a href="ajouter_ecole.php">+</a>
             </div>
         </div>
-        <div class="column">
 
-        </div>
     </div>
 </div>
 
