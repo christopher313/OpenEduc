@@ -1,5 +1,7 @@
 <?php
 
+//PAGE MOTEUR DE RECHERCHE
+
 //INITIALISATION DE LA PAGE
 include("database.php");
 session_start();

@@ -1,5 +1,7 @@
 <?php
 
+//PAGE D'ACCUEIL
+
 //INITIALISATION DE LA PAGE
 include("database.php");
 session_start();

@@ -1,6 +1,8 @@
 
 <?php
 
+//PAGE FORMULAIRE POUR AJOUTER L ECOLE
+
 //INITIALISATION DE LA PAGE
 include("database.php");
 session_start();

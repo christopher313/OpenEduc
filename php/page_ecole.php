@@ -1,23 +1,33 @@
 <?php
 
+//PAGE TYPE POUR LES INFO ECOLE
+
 //INITIALISATION DE LA PAGE
 include("database.php");
 session_start();
 require "navmenu.php";
+
+//SI LA SESSION EXISTE L'ID SESSION = ID USER
 if(isset($_SESSION['idUser'])){
     $idSession = $_SESSION['idUser'];
 }
+//SINON = -1 (PERMET D'EVITER LES BUGS POUR LES DROITS)
 else{
     $idSession = '-1';
 }
 
+
+//VARIABLES
 $ref = $_GET['id'];
+
+//REQUETE SQL POUR RECUPERER TOUTES LES INFOS DE L'ECOLE EN QUESTION PAR RAPPORT AU LIEN EN GET
 $sql = "SELECT * FROM `ecole` INNER JOIN `droits` ON droits.dr_ecoId=ecole.eco_id WHERE `eco_ref`= '$ref'";
 $recipesStatement = $db->prepare($sql);
 $recipesStatement->execute();
 $donnees = $recipesStatement->fetch(PDO::FETCH_ASSOC);
-$creatorId = $donnees['dr_creatorId'];
 
+//VARIABLES
+$creatorId = $donnees['dr_creatorId'];
 $nomEcole = $donnees['eco_nom'];
 $adresseEcole = $donnees['eco_adresse'];
 $cp = $donnees['eco_cp'];
@@ -32,12 +42,13 @@ $boucle = 0;
 $idDroit = $donnees['dr_usrId'];
 
 
-
+//REQUETE SQL POUR RECUPERER LES INFO DU COMPTE CREATEUR DE L'ECOLE
 $sql2 = "SELECT `ct_username` FROM `compte` WHERE `ct_id`= $creatorId";
 $recipesStatement2 = $db->prepare($sql2);
 $recipesStatement2->execute();
 $donnees2 = $recipesStatement2->fetch(PDO::FETCH_ASSOC);
 
+//REQUETE SQL POUR RECUPERE LES INFOS SUR LES DROITS DE L'UTILISATEUR SUR L'ECOLE
 $sql3 = "SELECT * FROM `droits` WHERE `dr_usrId`= '$idSession' AND `dr_ecoId` = '$ecoId' ";
 $recipesStatement3 = $db->prepare($sql3);
 $recipesStatement3->execute();
@@ -49,7 +60,7 @@ $creatorName = $donnees2['ct_username'];
 
 
 
-
+// BOUCLE POUR L'AFFICHAGE DU NUMERO DE TELEPHONE PERMETTANT L'ESPACEMENT (00 00 00 ..)
 for($i=0; $i<10; $i++){
     if($delimiteur == 2){
         $delimiteur = 1;
@@ -61,6 +72,7 @@ for($i=0; $i<10; $i++){
     }
 }
 
+//REQUETE SQL POUR RECUPERER LES DIFFERENTES CLASSES LIE A L'ECOLE
 $sql = "SELECT * FROM `classe` WHERE `cl_idEcole`='$ecoId'";
 $recipesStatement = $db->prepare($sql);
 $recipesStatement->execute();

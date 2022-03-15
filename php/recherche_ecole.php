@@ -1,13 +1,16 @@
 <?php
 
+//PAGE DE RESULTAT DE RECHERCHE D'ECOLE
+
 //INITIALISATION DE LA PAGE
 include("database.php");
 session_start();
 require "navmenu.php";
 
-
+//VARIABLE
 $search = $_GET['search-bar'];
 
+//REQUETE SQL POUR CHERCHER SI ECOLE EXISTE EN FONCTION DU TEXT INPUT 
 $sql = "SELECT eco_nom, eco_ref, eco_ville FROM `ecole` WHERE eco_nom LIKE '%$search%';";
 $recipesStatement = $db->prepare($sql);
 $recipesStatement->execute();
@@ -46,9 +49,11 @@ $row_cnt = $recipesStatement->rowCount();
         <ul>
             <?php 
 
+            //SI PAS DE CORRESPONDANCE ECRIRE :
             if($row_cnt == 0){
                 echo "Pas de resultat pour votre recherche";
             }
+            //SINON AFFICHER LES RESULTAT SOUS FORME DE LISTE 
             else{
                 foreach($recipes as $recipe){?>
                     <li><a href="page_ecole.php?id=<?php echo $recipe['eco_ref']?>"><?php echo $recipe['eco_nom']?> </li><?php

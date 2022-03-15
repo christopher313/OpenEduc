@@ -1,5 +1,7 @@
 <?php
 
+//PAGE FORMULAIRE DE CONNEXION
+
 //INITIALISATION DE LA PAGE
 include("database.php");
 session_start();
@@ -31,17 +33,19 @@ require "navmenu.php";
 
         <?php 
 
+        //SI UTILISATEUR DEJA CONNECTE REDIRIGER VERS ...
         if(isset($_SESSION['user'])){
             header("location:../index.php");
         }
 
+        //SI NOM UTILISATEUR RENSEIGNÉ FAIRE (PERMET D EVITER MESSAGE BUG PHP)
         if(isset($_POST["username"])){
 
             // VARIABLES
             $user = $_POST["username"];
             $password = $_POST['password'];
 
-            //REQUETE SQL
+            //REQUETE SQL POUR RECHERCHER SI LE NOM D UTILISATEUR ET MOT DE PASSE RENSEIGNE EXISTE ET CORRESPONDENT
             $sql = "SELECT * FROM `compte` WHERE `ct_username`= '$user' AND `ct_password`= '$password'";
             $recipesStatement = $db->prepare($sql);
             $recipesStatement->execute();
@@ -56,6 +60,7 @@ require "navmenu.php";
                 $_SESSION['role'] = $donnees['ct_role'];
                 header('location: dashboard.php');
             }
+            //SINON
             else{
                 printf("Compte inexistant");
             }

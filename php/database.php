@@ -1,5 +1,7 @@
 <?php
 
+//PAGE DE CONNEXION A LA BASE DE DONNES 
+
 try{
     $db = new PDO('mysql:host=127.0.0.1;dbname=bdd_openeduc;charset=utf8', "root", "" );
 }

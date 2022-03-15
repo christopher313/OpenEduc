@@ -2,10 +2,14 @@
 <?php
 
 //INITIALISATION DE LA PAGE
+
+//INITIALISATION 
 include("database.php");
 session_start();
 require "navmenu.php";
 
+
+//SI L'UTILISATEUR EST DE NIVEAU 1 OU 2: AFFICHER LA PAGE DE FORMULAIRE POUR L'AJOUT D'UNE PAGE
 if($_SESSION['role'] == 1 || 2){?>
 
     <?php
@@ -14,6 +18,7 @@ if($_SESSION['role'] == 1 || 2){?>
         header("location:index.php");
     }
 
+//VARIABLES
 $ref = $_GET['id'];
 $sql = "SELECT * FROM `ecole` WHERE `eco_ref`= '$ref'";
 $recipesStatement = $db->prepare($sql);

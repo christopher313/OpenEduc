@@ -7,8 +7,10 @@ require "navmenu.php";
 
 
 
-
+    //VARIABLE
     $ref = $_GET['id'];
+
+    //REQUETE SQL POUR RECUPERER LES INFOS DE L'ECOLE A L'AIDE DU LIEN EN GET
     $sql = "SELECT * FROM `ecole` WHERE `eco_ref`= '$ref'";
     $recipesStatement = $db->prepare($sql);
     $recipesStatement->execute();
@@ -17,12 +19,13 @@ require "navmenu.php";
     $eco_id=$donnees['eco_id'];
 
 
+    //REQUETE SQL POUR RECUPERER TOUTES LES LIGNES SUR LES DROITS ET LES INFO COMPTE LIÉS A L'ECOLE 
     $sql = "SELECT * FROM `droits` INNER JOIN compte ON droits.dr_usrId = compte.ct_id WHERE droits.dr_ecoId = '$eco_id'";
-
     $recipesStatement = $db->prepare($sql);
     $recipesStatement->execute();
     $donnees_droit = $recipesStatement->fetchAll();
 
+    //REQUETE SQL POUR RECUPERER 1 LIGNE SUR LES DROITS ET LES INFO COMPTE LIÉS A L'ECOLE 
     $sql = "SELECT * FROM `droits` INNER JOIN compte ON droits.dr_usrId = compte.ct_id WHERE droits.dr_ecoId = '$eco_id'";
     $recipesStatement = $db->prepare($sql);
     $recipesStatement->execute();

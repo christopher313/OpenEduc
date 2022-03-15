@@ -1,5 +1,7 @@
 <?php
 
+//BARRE DE NAVIGATION
+
 //INITIALISATION DE LA PAGE
 include("../php/database.php");
 

@@ -1,11 +1,16 @@
 <?php
 
+//PAGE DE PANNEL ADMINISTRATEUR
+
 //INITIALISATION DE LA PAGE
 include("database.php");
 session_start();
 require "navmenu.php";
+
+//VARIABLE
 $userid = $_SESSION['idUser'];
 
+//REQUETE SQL POUR RECUPERER LES DROITS ET LES INFO DU COMPTE LIE A L'ID DE LA SESSION
 $sql = "SELECT * FROM `droits` INNER JOIN ecole ON droits.dr_ecoId = ecole.eco_id WHERE dr_usrId = '$userid'";
 $recipesStatement = $db->prepare($sql);
 $recipesStatement->execute();
@@ -34,6 +39,7 @@ $recipes = $recipesStatement->fetchAll();
                 <h2>MES ECOLES</h2>
                 <ul>
                     <?php 
+                    //CREER UNE LISTE DES ECOLES OU L'UTILISATEUR A LES DROITS DE MODIFICATIONS
                     foreach($recipes as $recipe){?>
                         <li><a href="<?php echo 'page_ecole.php?id='.$recipe['eco_ref'] ?>"><?php echo $recipe['eco_nom']?><?php
                          if($recipe['dr_creatorId'] == $_SESSION['idUser'] ){?>
