@@ -40,6 +40,8 @@ $ecoId = $donnees['eco_id'];
 $totalEffectif = 0;
 $boucle = 0;
 $idDroit = $donnees['dr_usrId'];
+$listeNomProf = array();
+$listeEffectif = array();
 
 
 //REQUETE SQL POUR RECUPERER LES INFO DU COMPTE CREATEUR DE L'ECOLE
@@ -132,7 +134,9 @@ $recipes = $recipesStatement->fetchAll();
         </tr>
 
         <?php 
-        foreach($recipes as $recipe){ ?>
+        foreach($recipes as $recipe){
+            $listeNomProf[] = $recipe['cl_idNiveau'] . " de " . $recipe['cl_civilite'] . " ". $recipe['cl_nomProf'];
+            $listeEffectif[] = $recipe['cl_effectif'];  ?>
         <tr>
             <td><?php echo $recipe['cl_idNiveau']?></td>
             <td><?php echo $recipe['cl_civilite'] . " " . $recipe['cl_nomProf']?></td>
@@ -189,10 +193,14 @@ const ctx = document.getElementById('myChart').getContext('2d');
 const myChart = new Chart(ctx, {
     type: 'bar',
     data: {
-        labels: <?php echo json_encode([$nomEcole]) ?>,
+        labels: [<?php foreach($listeNomProf as $prof){
+            echo '"'. $prof . '",';
+        }  ?>] ,
         datasets: [{
-            label: 'effectifs écoles',
-            data: <?php echo json_encode([$totalEffectif]) ?>,
+            label: 'effectifs des classes',
+            data: [<?php foreach($listeEffectif as $effectif){
+                echo '"'. $effectif . '",';
+            } ?>],
             backgroundColor: [
                 'rgba(255, 99, 132, 0.2)',
                 'rgba(54, 162, 235, 0.2)',
@@ -222,6 +230,7 @@ const myChart = new Chart(ctx, {
     }
 });
 </script>
+
 
     
 </body>
