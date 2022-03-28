@@ -12,12 +12,15 @@ $ref = $_GET['id'];
 
 
 //RECUPERATION DE L'ID ECOLE
-$sql = "SELECT * FROM ecole INNER JOIN droits ON ecole.eco_id = droits.dr_ecoId WHERE `eco_ref`= $ref";
+$sql = "SELECT * FROM ecole INNER JOIN droits ON ecole.eco_id = droits.dr_ecoId WHERE `eco_ref`= '$ref'";
 $recipesStatement = $db->prepare($sql);
 $recipesStatement->execute();
 $donnees = $recipesStatement->fetch(PDO::FETCH_ASSOC);
 $idEcole = $donnees['eco_id'];
 $creatorId = $donnees['dr_creatorId'];
+
+
+echo $creatorId . " / " . $_SESSION['idUser'];
 
 if($creatorId == $_SESSION['idUser']){
 

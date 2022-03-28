@@ -19,12 +19,13 @@ require "navmenu.php";
 </head>
 <body>
     <div class="page_container">
-        <h1 class="title-h1">Bienvenue sur la plateforme OpenEduc</h1>
-        <div class="block-image-accueil">
-            <img id="img_accueil" src="../img/OPEN2.png"/>
-            <a class="button" href="#">Decouvrir plus</a>
-        </div>
-         
+            <h1 class="title-h1">Bienvenue sur la plateforme OpenEduc</h1>
+            <div class="block-image-accueil">
+                <img id="img_accueil" src="../img/OPEN2.png"/>
+                <a class="button" href="about.php">Decouvrir plus</a>
+            </div>
+ 
+    </div> 
     
 
 
