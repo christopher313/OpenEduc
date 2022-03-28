@@ -24,7 +24,7 @@ if($_SESSION['role'] == 1 || 2){
     $idCreateur = $idUser;
 
 
-    //REQUETE SQL POUR INSERER LES DONNEES DE L ECOLES 
+    //REQUETE SQL POUR INSERER LES DONNEES DE L ECOLE 
     $sql = "INSERT INTO `ecole`(`eco_nom`, `eco_ref`, `eco_adresse`, `eco_cp`, `eco_ville`, `eco_mail`, `eco_tel`, `eco_lien`) VALUES (:nom , :ref, :adresse, :cp, :ville, :mail, :tel, :lien) ";
     $res = $db->prepare($sql);
     $exec = $res->execute(array(":nom"=>$nom, ":ref"=>$ref, ":adresse"=>$adresse, ":cp"=>$cp, ":ville"=>$ville, ":mail"=>$mail, ":tel"=>$tel, ":lien"=>$lien));
@@ -42,6 +42,7 @@ if($_SESSION['role'] == 1 || 2){
         //REDIRECTION
         header('location: dashboard.php');
     }
+    //SINON FAIRE
     else{
         echo "Insertion echoué";
     }

@@ -141,7 +141,12 @@ $recipes = $recipesStatement->fetchAll();
             <td><?php echo $recipe['cl_idNiveau']?></td>
             <td><?php echo $recipe['cl_civilite'] . " " . $recipe['cl_nomProf']?></td>
             <td><?php echo $recipe['cl_effectif']?></td>
-            <td><a href="supprimer_classe.php?idClasse=<?php echo $recipe['cl_id']?>&idEcole=<?php echo $ref?>">X</a></td>
+            <?php
+            if($row_cnt>0){?>
+                <td><a href="supprimer_classe.php?idClasse=<?php echo $recipe['cl_id']?>&refEcole=<?php echo $ref?>&idEcole=<?php echo $ecoId;?>">X</a></td>
+            <?php
+            }
+            ?>
         </tr>
             <?php
             $totalEffectif = $totalEffectif + $recipe['cl_effectif'];
