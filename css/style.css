@@ -266,3 +266,14 @@ table {
 .page-affichage{
     height: 1002px;
 }
+
+.about-content{
+    display: flex;
+    justify-content: center;
+}
+
+#img-about{
+    display: flex;
+    height: 500px;
+    width: 800px;
+}
