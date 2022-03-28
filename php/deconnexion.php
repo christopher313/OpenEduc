@@ -4,7 +4,7 @@
 
 session_start();
 session_destroy();
-header('location: ../accueil.php');
+header('location: accueil.php');
 
 
 ?>
