@@ -3,9 +3,9 @@
 //PAGE D'ACCUEIL
 
 //INITIALISATION DE LA PAGE
-include("database.php");
+include("php/database.php");
 session_start();
-require "navmenu.php";
+require "php/navmenu.php";
 
 ?>
 
