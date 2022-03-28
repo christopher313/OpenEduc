@@ -13,7 +13,7 @@ if($_SESSION['role'] == 1 || 2){?>
     <?php
     }
     else{
-        header("location:index.php");
+        header("location:accueil.php");
     }
     
 ?>

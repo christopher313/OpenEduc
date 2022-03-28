@@ -78,21 +78,21 @@ include("database.php");
 <body>
 
 <nav class="menu-nav">
-    <a href="index.php"><img class="img_ico" src="../img/Copie de OPEN.png"></a>
+    <a href="accueil.php"><img class="img_ico" src="../img/Copie de OPEN.png"></a>
     <ul class="menu-ul">
     <?php
     if(isset($_SESSION['user'])){?>
-        <li class="menu-li"><a class="menu-btn" href="../php/dashboard.php"><?php echo $_SESSION['user'] ?><ion-icon name="person-circle-sharp"></ion-icon>
+        <li class="menu-li"><a class="menu-btn" href="dashboard.php"><?php echo $_SESSION['user'] ?><ion-icon name="person-circle-sharp"></ion-icon>
 </a></li>
-        <li class="menu-li"><a class="menu-btn" href="../php/deconnexion.php">Deconnexion</a></li><?php
+        <li class="menu-li"><a class="menu-btn" href="deconnexion.php">Deconnexion</a></li><?php
     }
     else{?>
-        <li class="menu-li"><a class="menu-btn" href="../php/connexion.php">Connexion</a></li><?php
+        <li class="menu-li"><a class="menu-btn" href="connexion.php">Connexion</a></li><?php
     }
     ?>
-    <li class="menu-li"><a class="menu-btn" href="../php/ecoles.php">Les écoles</a></li>
-    <li class="menu-li"><a class="menu-btn" href="../php/about.php">A propos</a></li>
-    <li class="menu-li"><a class="menu-btn" href="../index.php">Accueil</a></li>
+    <li class="menu-li"><a class="menu-btn" href="ecoles.php">Les écoles</a></li>
+    <li class="menu-li"><a class="menu-btn" href="about.php">A propos</a></li>
+    <li class="menu-li"><a class="menu-btn" href="accueil.php">Accueil</a></li>
     </ul>
 </nav>
 

@@ -35,7 +35,7 @@ require "navmenu.php";
 
         //SI UTILISATEUR DEJA CONNECTE REDIRIGER VERS ...
         if(isset($_SESSION['user'])){
-            header("location:../index.php");
+            header("location:../accueil.php");
         }
 
         //SI NOM UTILISATEUR RENSEIGNÉ FAIRE (PERMET D EVITER MESSAGE BUG PHP)
