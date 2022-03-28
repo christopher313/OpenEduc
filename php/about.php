@@ -15,6 +15,10 @@ require "navmenu.php";
 </head>
 <body>
 
+<div class="page_container">
+    <h1 class="title-h1">A propos</h1>
+</div>
+
 
     
 </body>

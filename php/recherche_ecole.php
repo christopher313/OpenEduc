@@ -18,6 +18,10 @@ $recipes = $recipesStatement->fetchAll();
 
 $row_cnt = $recipesStatement->rowCount();
 
+if(empty($_GET['search-bar']) || ($_GET['search-bar'] == " ")){
+    header('location: ecoles.php');
+}
+
 
 ?>
 
@@ -38,7 +42,7 @@ $row_cnt = $recipesStatement->rowCount();
     </div>
 
 
-    <h1 class="title-h1">Resultats de votre recherche</h1>
+    <h1 class="title-h1">Resultats pour <?php echo $_GET['search-bar']?></h1>
 
     <div class="page_container">
 
