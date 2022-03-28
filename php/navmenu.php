@@ -72,6 +72,8 @@ include("../php/database.php");
 
 
 </style>
+<link rel="icon" type="image/png" sizes="16x16" href="../img/OPEN2.png">
+
 </head>
 <body>
 

@@ -10,28 +10,34 @@ require "navmenu.php";
 //VARIABLE
 $ref = $_GET['id'];
 
+
 //RECUPERATION DE L'ID ECOLE
-$sql = "SELECT eco_id FROM `ecole` WHERE eco_ref = '$ref'";
+$sql = "SELECT * FROM ecole INNER JOIN droits ON ecole.eco_id = droits.dr_ecoId WHERE `eco_ref`= $ref";
 $recipesStatement = $db->prepare($sql);
 $recipesStatement->execute();
 $donnees = $recipesStatement->fetch(PDO::FETCH_ASSOC);
 $idEcole = $donnees['eco_id'];
+$creatorId = $donnees['dr_creatorId'];
 
-//SUPPRESSION DE L'ECOLE 
-$sql = "DELETE FROM `ecole` WHERE `eco_id`='$idEcole'";
-$recipesStatement = $db->prepare($sql);
-$recipesStatement->execute();
+if($creatorId == $_SESSION['idUser']){
 
-//SUPPRESSION DES DROITS 
-$sql = "SELECT * FROM `droits` WHERE dr_ecoId = '$idEcole'";
-$recipesStatement = $db->prepare($sql);
-$recipesStatement->execute();
+    //SUPPRESSION DE L'ECOLE 
+    $sql = "DELETE FROM `ecole` WHERE `eco_id`='$idEcole'";
+    $recipesStatement = $db->prepare($sql);
+    $recipesStatement->execute();
 
-//SUPPRESSION DES CLASSES
+    //SUPPRESSION DES DROITS 
+    $sql = "SELECT * FROM `droits` WHERE dr_ecoId = '$idEcole'";
+    $recipesStatement = $db->prepare($sql);
+    $recipesStatement->execute();
 
-$sql = "DELETE FROM `classe` WHERE `cl_idEcole`='$idEcole'";
-$recipesStatement = $db->prepare($sql);
-$recipesStatement->execute();
+    //SUPPRESSION DES CLASSES
+
+    $sql = "DELETE FROM `classe` WHERE `cl_idEcole`='$idEcole'";
+    $recipesStatement = $db->prepare($sql);
+    $recipesStatement->execute();
+
+}
 
 
 
