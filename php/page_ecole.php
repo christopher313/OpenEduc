@@ -42,7 +42,7 @@ $boucle = 0;
 $idDroit = $donnees['dr_usrId'];
 $listeNomProf = array();
 $listeEffectif = array();
-
+$listClasses = array();
 
 //REQUETE SQL POUR RECUPERER LES INFO DU COMPTE CREATEUR DE L'ECOLE
 $sql2 = "SELECT `ct_username` FROM `compte` WHERE `ct_id`= $creatorId";
@@ -136,7 +136,8 @@ $recipes = $recipesStatement->fetchAll();
         <?php 
         foreach($recipes as $recipe){
             $listeNomProf[] = $recipe['cl_idNiveau'] . " de " . $recipe['cl_civilite'] . " ". $recipe['cl_nomProf'];
-            $listeEffectif[] = $recipe['cl_effectif'];  ?>
+            $listeEffectif[] = $recipe['cl_effectif'];
+            $listClasses[] = $recipe['cl_idNiveau'];  ?>
         <tr>
             <td><?php echo $recipe['cl_idNiveau']?></td>
             <td><?php echo $recipe['cl_civilite'] . " " . $recipe['cl_nomProf']?></td>
@@ -184,7 +185,7 @@ $recipes = $recipesStatement->fetchAll();
 
 <!-- Génération d'un graphique représentant les effectifs de chaque écoles.-->
 
-<div class="chart-container" style='position: relative; height:40vh; width:80vh; margin:auto; margin-top: 30px;'>
+<div style='position: relative;  margin-top:30px; margin-bottom:30px;'>
 <canvas id="myChart"></canvas>
 </div>
 
@@ -205,27 +206,74 @@ const myChart = new Chart(ctx, {
             label: 'effectifs des classes',
             data: [<?php foreach($listeEffectif as $effectif){
                 echo '"'. $effectif . '",';
-            } ?>],
+            }
+             ?>],
             backgroundColor: [
-                'rgba(255, 99, 132, 0.2)',
-                'rgba(54, 162, 235, 0.2)',
-                'rgba(255, 206, 86, 0.2)',
-                'rgba(75, 192, 192, 0.2)',
-                'rgba(153, 102, 255, 0.2)',
-                'rgba(255, 159, 64, 0.2)'
-            ],
-            borderColor: [
-                'rgba(255, 99, 132, 1)',
-                'rgba(54, 162, 235, 1)',
-                'rgba(255, 206, 86, 1)',
-                'rgba(75, 192, 192, 1)',
-                'rgba(153, 102, 255, 1)',
-                'rgba(255, 159, 64, 1)'
-            ],
-            borderWidth: 1
+                    <?php foreach($listClasses as $classe)
+                    {
+                        switch($classe)
+                        {
+                            case "CP":
+                                ?>
+                                'rgba(23, 99, 132, 0.2)',
+                                <?php
+                            break;
+                            case "CP/CE1":
+                                ?>
+                                'rgba(54, 162, 235, 0.2)',
+                                <?php
+                            break;
+                            case "CE1":
+                                ?>
+                                'rgba(255, 206, 86, 0.2)',
+                                <?php
+                            break;
+                            case "CE1/CE2":
+                                ?>
+                                'rgba(75, 192, 192, 0.2)',
+                                <?php
+                            break;
+                            case "CE2":
+                                ?>
+                                 'rgba(153, 102, 255, 0.2)',
+                                <?php
+                            break;
+                            case "CE2/CM1":
+                                ?>
+                                 'rgba(255, 159, 64, 0.2)',
+                                <?php
+                            break;
+                            case "CM1":
+                                ?>
+                                'rgba(204, 63, 63, 0.2)',
+                                <?php
+                            break;
+                            case "CM1/CM2":
+                                ?>
+                                'rgba(140, 66, 16, 0.2)',
+                                <?php
+                            break;
+                            case "CM2":
+                                ?>
+                                'rgba(47, 103, 25, 0.2)',
+                                <?php
+                            break;
+                        }
+                    }
+                
+                    ?>
+            ]
         }]
     },
     options: {
+        plugins: {
+            legend: {
+                display: true,
+                labels: {
+                    color: 'rgb(000, 000, 000)',
+                }
+            }
+        },
         responsive: true,
         scales: {
             y: {

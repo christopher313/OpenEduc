@@ -54,7 +54,7 @@ include("database.php");
 .menu-btn:hover{
   background-color: #272323 ;
   border-radius: 15px;
-
+  transition: 0.5s;
 }
 
 .img_ico{
