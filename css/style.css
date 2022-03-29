@@ -277,3 +277,22 @@ table {
     height: 500px;
     width: 800px;
 }
+
+.historique-box{
+    display: flex;
+    background-color: #BCB6B6;
+    height: 30px;
+    border: 2px solid black;
+    width: 800px;
+    margin-top: 20px;
+
+}
+
+.historique-box:hover{
+    background-color: beige;
+}
+
+.historique-container{
+    display: flex;
+    justify-content: center;
+}
