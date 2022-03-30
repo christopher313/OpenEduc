@@ -82,7 +82,7 @@ include("database.php");
     <ul class="menu-ul">
     <?php
     if(isset($_SESSION['user'])){?>
-        <li class="menu-li"><a  style="display:flex; justify-content:center; height:20px"class="menu-btn" href="dashboard.php"><?php echo $_SESSION['user'] ?><ion-icon style="width:30px; height:30px" name="person-circle-sharp"></ion-icon>
+        <li class="menu-li"><a class="menu-btn" style="display:flex; justify-content:center; padding-top:15px; " href="dashboard.php"><?php echo $_SESSION['user'] ?><ion-icon style="width:30px; height:30px" name="person-circle-sharp"></ion-icon>
 </a></li>
         <li class="menu-li"><a class="menu-btn" href="deconnexion.php">Deconnexion</a></li><?php
     }
