@@ -11,7 +11,7 @@ require "navmenu.php";
 $search = $_GET['search-bar'];
 
 //REQUETE SQL POUR CHERCHER SI ECOLE EXISTE EN FONCTION DU TEXT INPUT 
-$sql = "SELECT eco_nom, eco_ref, eco_ville FROM `ecole` WHERE eco_nom LIKE '%$search%';";
+$sql = "SELECT eco_id, eco_nom, eco_ref, eco_ville FROM `ecole` WHERE eco_nom LIKE '%$search%';";
 $recipesStatement = $db->prepare($sql);
 $recipesStatement->execute();
 $recipes = $recipesStatement->fetchAll();
@@ -60,7 +60,7 @@ if(empty($_GET['search-bar']) || ($_GET['search-bar'] == " ")){
             //SINON AFFICHER LES RESULTAT SOUS FORME DE LISTE 
             else{
                 foreach($recipes as $recipe){?>
-                    <li><a href="page_ecole.php?id=<?php echo $recipe['eco_ref']?>"><?php echo $recipe['eco_nom']?> </li><?php
+                    <li><a href="page_ecole.php?id=<?php echo $recipe['eco_id']?>"><?php echo $recipe['eco_nom']?> </li><?php
                 }
             }
             

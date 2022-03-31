@@ -8,25 +8,24 @@ require "navmenu.php";
 
 
     //VARIABLE
-    $ref = $_GET['id'];
+    $ecoId = $_GET['id'];
 
     //REQUETE SQL POUR RECUPERER LES INFOS DE L'ECOLE A L'AIDE DU LIEN EN GET
-    $sql = "SELECT * FROM `ecole` WHERE `eco_ref`= '$ref'";
+    $sql = "SELECT * FROM `ecole` WHERE `eco_id`= '$ecoId'";
     $recipesStatement = $db->prepare($sql);
     $recipesStatement->execute();
     $donnees = $recipesStatement->fetch(PDO::FETCH_ASSOC);
 
-    $eco_id=$donnees['eco_id'];
 
 
     //REQUETE SQL POUR RECUPERER TOUTES LES LIGNES SUR LES DROITS ET LES INFO COMPTE LIÉS A L'ECOLE 
-    $sql = "SELECT * FROM `droits` INNER JOIN compte ON droits.dr_usrId = compte.ct_id WHERE droits.dr_ecoId = '$eco_id'";
+    $sql = "SELECT * FROM `droits` INNER JOIN compte ON droits.dr_usrId = compte.ct_id WHERE droits.dr_ecoId = '$ecoId'";
     $recipesStatement = $db->prepare($sql);
     $recipesStatement->execute();
     $donnees_droit = $recipesStatement->fetchAll();
 
     //REQUETE SQL POUR RECUPERER 1 LIGNE SUR LES DROITS ET LES INFO COMPTE LIÉS A L'ECOLE 
-    $sql = "SELECT * FROM `droits` INNER JOIN compte ON droits.dr_usrId = compte.ct_id WHERE droits.dr_ecoId = '$eco_id'";
+    $sql = "SELECT * FROM `droits` INNER JOIN compte ON droits.dr_usrId = compte.ct_id WHERE droits.dr_ecoId = '$ecoId'";
     $recipesStatement = $db->prepare($sql);
     $recipesStatement->execute();
     $donnees_droit2 = $recipesStatement->fetch(PDO::FETCH_ASSOC);
@@ -63,7 +62,7 @@ require "navmenu.php";
                 <tr>
                     <td><?php echo $donnee_droit['ct_username']?></td><?php
                         if($donnee_droit['dr_creatorId']== $_SESSION['idUser']){?>
-                            <td><a href="supprimer_droit.php?idDroit=<?php echo $donnee_droit['dr_id']?>&idEcole=<?php echo $ref ?>">X</a></td><?php
+                            <td><a href="supprimer_droit.php?idDroit=<?php echo $donnee_droit['dr_id']?>&idEcole=<?php echo $ecoId ?>">X</a></td><?php
                         }?>
                 </tr><?php
                 }?>
@@ -79,9 +78,9 @@ require "navmenu.php";
     </div>
 
 
-            <form action="ajouter_droit_utilisateur.php?id=<?php echo $ref?>" method="post" class="formulaire_connexion">
+            <form action="ajouter_droit_utilisateur.php?id=<?php echo $ecoId?>" method="post" class="formulaire_connexion">
                 <input type="text" class="champ" placeholder="Nom d'utilisateur" name="user_droit"/>
-                <input type="HIDDEN" value="<?php echo $eco_id ?>" name="eco_id"/>
+                <input type="HIDDEN" value="<?php echo $ecoId ?>" name="eco_id"/>
                 <input type="submit" class="bouton" value="Ajouter" name="bouton_droit"/>
             </form>
 
@@ -95,7 +94,7 @@ require "navmenu.php";
 }
 
 else{
-    header('location: page_ecole.php?id=' . $ref);
+    header('location: page_ecole.php?id=' . $ecoId);
 
 }
 ?>

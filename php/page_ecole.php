@@ -18,15 +18,16 @@ else{
 
 
 //VARIABLES
-$ref = $_GET['id'];
+$ecoId = $_GET['id'];
 
 //REQUETE SQL POUR RECUPERER TOUTES LES INFOS DE L'ECOLE EN QUESTION PAR RAPPORT AU LIEN EN GET
-$sql = "SELECT * FROM `ecole` INNER JOIN `droits` ON droits.dr_ecoId=ecole.eco_id WHERE `eco_ref`= '$ref'";
+$sql = "SELECT * FROM `ecole` INNER JOIN `droits` ON droits.dr_ecoId=ecole.eco_id WHERE `eco_id`= '$ecoId'";
 $recipesStatement = $db->prepare($sql);
 $recipesStatement->execute();
 $donnees = $recipesStatement->fetch(PDO::FETCH_ASSOC);
 
 //VARIABLES
+$ref = $donnees['eco_ref'];
 $creatorId = $donnees['dr_creatorId'];
 $nomEcole = $donnees['eco_nom'];
 $adresseEcole = $donnees['eco_adresse'];
@@ -35,11 +36,17 @@ $ville = $donnees['eco_ville'];
 $eco_mail = $donnees['eco_mail'];
 $eco_tel = $donnees['eco_tel'];
 $eco_tel_decompose = "";
+
+//Pour l'affichage du numéro de téléphone
 $delimiteur = 0;
-$ecoId = $donnees['eco_id'];
+
+//Pour le calcul de la moyenne des effectifs
 $totalEffectif = 0;
 $boucle = 0;
+
 $idDroit = $donnees['dr_usrId'];
+
+//Création de liste php pour l'affichage du graphique en js
 $listeNomProf = array();
 $listeEffectif = array();
 $listClasses = array();
@@ -116,10 +123,10 @@ $recipes = $recipesStatement->fetchAll();
 
 
     if($row_cnt>=1){?>
-        <a href="historique_traitement.php?id=<?php echo $ecoId ?>">Historique des modifications</a>
-        <a href="ajouter_classe.php?id=<?php echo $ref ?>">Ajouter une classe</a><?php
+        <a href="historique.php?id=<?php echo $ecoId ?>">Historique des modifications</a>
+        <a href="ajouter_classe.php?id=<?php echo $ecoId ?>">Ajouter une classe</a><?php
         if($creatorId == $idSession){?>
-            <a href="droits.php?id=<?php echo $ref ?>">Gérer les droits</a><?php
+            <a href="droits.php?id=<?php echo $ecoId ?>">Gérer les droits</a><?php
         }
      }
     ?>
@@ -145,7 +152,7 @@ $recipes = $recipesStatement->fetchAll();
             <td><?php echo $recipe['cl_effectif']?></td>
             <?php
             if($row_cnt>0){?>
-                <td><a href="supprimer_classe.php?idClasse=<?php echo $recipe['cl_id']?>&refEcole=<?php echo $ref?>&idEcole=<?php echo $ecoId;?>">X</a></td>
+                <td><a href="supprimer_classe.php?idClasse=<?php echo $recipe['cl_id']?>&id=<?php echo $ecoId?>">X</a></td>
             <?php
             }
             ?>

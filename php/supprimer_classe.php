@@ -13,8 +13,8 @@ if(isset($_SESSION['idUser'])){
 
 //VARIABLES
 $ref_classe = $_GET['idClasse'];
-$ref_ecole = $_GET['refEcole'];
-$ecoId = $_GET['idEcole'];
+
+$ecoId = $_GET['id'];
 
 
 // REQUETE SQL POUR RECUPERER LES DROITS
@@ -30,10 +30,17 @@ if($row_cnt>0){
     $sql = "DELETE FROM `classe` WHERE `cl_id`='$ref_classe'";
     $recipesStatement = $db->prepare($sql);
     $recipesStatement->execute();
+
+    //AJOUT DANS L'HISTORIQUE
+
+    $laDate = date('Y-m-d H:i:s');
+    $sqlHistorique = "INSERT INTO `modifications`(`mdf_idEcole`, `mdf_idUser`, `mdf_date`, `mdf_type`) VALUES (:idEcole, :idUser, :laDate, :typeModif)";
+    $res = $db->prepare($sqlHistorique);
+    $exec = $res->execute(array(":idEcole"=>$ecoId, ":idUser"=>$idSession, ":laDate"=>$laDate, ":typeModif"=>1));
 }
 
 //REDIRIGER VERS ... 
-$lien = "page_ecole.php?id=".$ref_ecole;
+$lien = "page_ecole.php?id=".$ecoId;
 header('location: ' . $lien);
 
 

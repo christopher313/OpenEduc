@@ -19,12 +19,12 @@ if($_SESSION['role'] == 1 || 2){?>
     }
 
 //VARIABLES
-$ref = $_GET['id'];
-$sql = "SELECT * FROM `ecole` WHERE `eco_ref`= '$ref'";
+$ecoId = $_GET['id'];
+$sql = "SELECT * FROM `ecole` WHERE `eco_id`= '$ecoId'";
 $recipesStatement = $db->prepare($sql);
 $recipesStatement->execute();
 $donnees = $recipesStatement->fetch(PDO::FETCH_ASSOC);
-$idEcole = $donnees['eco_id'];
+
 
     
 ?>
@@ -40,7 +40,7 @@ $idEcole = $donnees['eco_id'];
     <h1 class="title-h1">Ajouter une classe pour <?php echo $donnees['eco_nom'] ?></h1>
 
     <div class="page_container">
-        <form action="ajouter_classe_traitement.php?id=<?php echo $ref?>" method="post" class="formulaire_connexion">
+        <form action="ajouter_classe_traitement.php?id=<?php echo $ecoId?>" method="post" class="formulaire_connexion">
             <div class="check-form">
             <label for="nameclasses">Choisir un niveau de classe:</label>
                 <select name="classes">
@@ -65,7 +65,7 @@ $idEcole = $donnees['eco_id'];
             </div>
             <input class="champ" type="text" placeholder="Nom du professeur" name="nom_prof">
             <input class="champ" type="number" placeholder="Effectif" name="effectif">
-            <input class="champ" type="HIDDEN" value="<?php echo $idEcole ?>" name="idEcole" >
+            <input class="champ" type="HIDDEN" value="<?php echo $ecoId ?>" name="idEcole" >
             <input class="button" type="submit" value="Ajouter" name="bouton_envoie">
         </form>
 

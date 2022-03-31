@@ -41,9 +41,9 @@ $recipes = $recipesStatement->fetchAll();
                     <?php 
                     //CREER UNE LISTE DES ECOLES OU L'UTILISATEUR A LES DROITS DE MODIFICATIONS
                     foreach($recipes as $recipe){?>
-                        <li><a href="<?php echo 'page_ecole.php?id='.$recipe['eco_ref'] ?>"><?php echo $recipe['eco_nom']?><?php
+                        <li><a href="<?php echo 'page_ecole.php?id='.$recipe['eco_id'] ?>"><?php echo $recipe['eco_nom']?><?php
                          if($recipe['dr_creatorId'] == $_SESSION['idUser'] ){?>
-                            <a href="<?php echo 'supprimer_ecole.php?id='.$recipe['eco_ref']?>" id="delete">X</a></li><?php
+                            <a href="<?php echo 'supprimer_ecole.php?id='.$recipe['eco_id']?>" id="delete">X</a></li><?php
                          }   
                     }?>
                 </ul>

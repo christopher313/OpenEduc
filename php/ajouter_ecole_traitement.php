@@ -19,15 +19,14 @@ if($_SESSION['role'] == 1 || 2){
     $ville = $_POST['school_city'];
     $mail = $_POST['school_mail'];
     $tel = $_POST['school_number'];
-    $lien = $ref . ".php";
     $idUser = $_SESSION['idUser'];
     $idCreateur = $idUser;
 
 
     //REQUETE SQL POUR INSERER LES DONNEES DE L ECOLE 
-    $sql = "INSERT INTO `ecole`(`eco_nom`, `eco_ref`, `eco_adresse`, `eco_cp`, `eco_ville`, `eco_mail`, `eco_tel`, `eco_lien`) VALUES (:nom , :ref, :adresse, :cp, :ville, :mail, :tel, :lien) ";
+    $sql = "INSERT INTO `ecole`(`eco_nom`, `eco_ref`, `eco_adresse`, `eco_cp`, `eco_ville`, `eco_mail`, `eco_tel`) VALUES (:nom , :ref, :adresse, :cp, :ville, :mail, :tel) ";
     $res = $db->prepare($sql);
-    $exec = $res->execute(array(":nom"=>$nom, ":ref"=>$ref, ":adresse"=>$adresse, ":cp"=>$cp, ":ville"=>$ville, ":mail"=>$mail, ":tel"=>$tel, ":lien"=>$lien));
+    $exec = $res->execute(array(":nom"=>$nom, ":ref"=>$ref, ":adresse"=>$adresse, ":cp"=>$cp, ":ville"=>$ville, ":mail"=>$mail, ":tel"=>$tel));
     //RECUPERATION DU DERNIERE ID INSERE
     $last_id = $db->lastInsertId();
 
