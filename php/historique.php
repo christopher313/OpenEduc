@@ -7,25 +7,31 @@ include("database.php");
 session_start();
 require "navmenu.php";
 
-/*
-SELECT mdf_date, mdf_idUser, eco_nom  
-FROM `modifications` 
-INNER JOIN ecole 
-ON modifications.mdf_idEcole = ecole.eco_id 
-INNER JOIN compte
-ON modifications.mdf_idUser = compte.ct_username
-WHERE mdf_idEcole = 27;
-
-*/
 
 
 $idEcole = $_GET['id'];
+if(isset($_SESSION['idUser'])){
+    $idSession = $_SESSION['idUser'];
 
+
+
+//REQUETE POUR RECUPERER INFORMATION DE LA TABLE HISTORIQUE
 $sql = "SELECT mdf_date, mdf_idUser, eco_nom, mdf_type, ct_username FROM `modifications` INNER JOIN ecole ON modifications.mdf_idEcole = ecole.eco_id INNER JOIN compte ON modifications.mdf_idUser=compte.ct_id WHERE mdf_idEcole = '$idEcole';";
-
 $recipesStatement = $db->prepare($sql);
 $recipesStatement->execute();
 $recipes = $recipesStatement->fetchAll();
+
+//REQUETE POUR VERIFIER SI UTILISATEUR A BIEN LES DROITS SUR L'ECOLE
+$sqlSelectDroits = "SELECT * FROM `droits` WHERE `dr_ecoId`= '$idEcole' AND `dr_usrId`= '$idSession';";
+$recipesStatement = $db->prepare($sqlSelectDroits);
+$recipesStatement->execute();
+$recipesDroits = $recipesStatement->fetchAll();
+$row_cnt = $recipesStatement->rowCount();
+
+
+if($row_cnt>0){
+
+
 
 ?>
 
@@ -50,7 +56,7 @@ $recipes = $recipesStatement->fetchAll();
             $typeModif = $recipe['mdf_type'];
             switch($typeModif){
                 case 0:
-                    $typeModif = "non défini";
+                    $typeModif = "a ouvert le profil ";
                     break;
                 case 1:
                     $typeModif = "a supprimé une classe ";
@@ -76,3 +82,14 @@ $recipes = $recipesStatement->fetchAll();
     
 </body>
 </html>
+
+<?php 
+}
+else{
+    header('location: accueil.php');
+}
+}
+else{
+    header('location: accueil.php');
+}
+?>

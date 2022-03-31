@@ -124,6 +124,7 @@ $recipes = $recipesStatement->fetchAll();
 
     if($row_cnt>=1){?>
         <a href="historique.php?id=<?php echo $ecoId ?>">Historique des modifications</a>
+        <a href="modification_ecole.php?id=<?php echo $ecoId ?>">Modifier les informations de l'école</a>
         <a href="ajouter_classe.php?id=<?php echo $ecoId ?>">Ajouter une classe</a><?php
         if($creatorId == $idSession){?>
             <a href="droits.php?id=<?php echo $ecoId ?>">Gérer les droits</a><?php

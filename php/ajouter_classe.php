@@ -9,18 +9,12 @@ session_start();
 require "navmenu.php";
 
 
-//SI L'UTILISATEUR EST DE NIVEAU 1 OU 2: AFFICHER LA PAGE DE FORMULAIRE POUR L'AJOUT D'UNE PAGE
-if($_SESSION['role'] == 1 || 2){?>
-
-    <?php
-    }
-    else{
-        header("location:accueil.php");
-    }
-
 //VARIABLES
 $ecoId = $_GET['id'];
-$sql = "SELECT * FROM `ecole` WHERE `eco_id`= '$ecoId'";
+
+
+//REQUETE SQL POUR RECUPERE LES INFORMATION DE L'ECOLE 
+$sql = "SELECT eco_nom, eco_id FROM `ecole` WHERE `eco_id`= '$ecoId'";
 $recipesStatement = $db->prepare($sql);
 $recipesStatement->execute();
 $donnees = $recipesStatement->fetch(PDO::FETCH_ASSOC);

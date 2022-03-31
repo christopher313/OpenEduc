@@ -8,13 +8,6 @@ include("database.php");
 session_start();
 require "navmenu.php";
 
-if($_SESSION['role'] == 1 || 2){?>
-
-    <?php
-    }
-    else{
-        header("location:accueil.php");
-    }
     
 ?>
 

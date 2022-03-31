@@ -7,6 +7,8 @@ include("database.php");
 session_start();
 require "navmenu.php";
 
+//SI UTILISATEUR A PAS LE ROLE 1 OU 2 FAIRE
+if($_SESSION['role'] == 1 || 2){
 
     //VARIABLES
     $nom = strtoupper($_POST['school_name']);
@@ -17,31 +19,27 @@ require "navmenu.php";
     $mail = $_POST['school_mail'];
     $tel = $_POST['school_number'];
     $idSession = $_SESSION['idUser'];
-    $idCreateur = $idSession;
+    $idCreateur = $idUser;
+    $ecoId = $_GET['id'];
 
 
     //REQUETE SQL POUR INSERER LES DONNEES DE L ECOLE 
-    $sqlInsertEcole = "INSERT INTO `ecole`(`eco_nom`, `eco_ref`, `eco_adresse`, `eco_cp`, `eco_ville`, `eco_mail`, `eco_tel`) VALUES (:nom , :ref, :adresse, :cp, :ville, :mail, :tel) ";
-    $res = $db->prepare($sqlInsertEcole);
+    $sql = "UPDATE `ecole` SET eco_nom=:nom, eco_ref=:ref, eco_adresse=:adresse, eco_cp=:cp, eco_ville=:ville, eco_mail=:mail, eco_tel=:tel WHERE eco_id='$ecoId'";
+    $res = $db->prepare($sql);
     $exec = $res->execute(array(":nom"=>$nom, ":ref"=>$ref, ":adresse"=>$adresse, ":cp"=>$cp, ":ville"=>$ville, ":mail"=>$mail, ":tel"=>$tel));
-    //RECUPERATION DU DERNIERE ID INSERE
-    $last_id = $db->lastInsertId();
+  
 
     //SI LA REQUETE A BIEN FONCTIONNER FAIRE
     if($exec){
-        echo "Insertion réussie";
-        //REQUETE SQL POUR INSERER LES DROITS AUTOMATIQUE DU CREATEUR DANS LA TABLE DROIT
-        $sqlInsertDroits = "INSERT INTO `droits`(`dr_creatorId`, `dr_usrId`, `dr_ecoId`) VALUES (:idCreateur, :idUtilisateur, :idEcole)";
-        $res = $db->prepare($sqlInsertDroits);
-        $exec = $res->execute(array(":idCreateur"=>$idCreateur, ":idUtilisateur"=>$idSession, ":idEcole"=>$last_id));
 
-        // AJOUTER A l'HISTORIQUE
+        //AJOUT DANS L'HISTORIQUE
+
         $laDate = date('Y-m-d H:i:s');
         $sqlHistorique = "INSERT INTO `modifications`(`mdf_idEcole`, `mdf_idUser`, `mdf_date`, `mdf_type`) VALUES (:idEcole, :idUser, :laDate, :typeModif)";
         $res = $db->prepare($sqlHistorique);
-        $exec = $res->execute(array(":idEcole"=>$last_id, ":idUser"=>$idSession, ":laDate"=>$laDate, ":typeModif"=>0));
-       
-        //REDIRECTION
+        $exec = $res->execute(array(":idEcole"=>$ecoId, ":idUser"=>$idSession, ":laDate"=>$laDate, ":typeModif"=>3));
+
+
         header('location: dashboard.php');
     }
     //SINON FAIRE
@@ -49,6 +47,12 @@ require "navmenu.php";
         echo "Insertion echoué";
     }
 
+}
+
+//SINON REDIRECTION 
+else{
+    header("location:accueil.php");
+}
 
 
 
