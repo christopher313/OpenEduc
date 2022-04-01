@@ -8,7 +8,14 @@ session_start();
 require "navmenu.php";
 
 
-    //VARIABLES
+//VARIABLES
+
+
+
+
+
+if(isset($_POST['school_name'])){
+
     $nom = strtoupper($_POST['school_name']);
     $ref = strtoupper($_POST['school_ref']);
     $adresse = $_POST['school_adresse'];
@@ -18,7 +25,6 @@ require "navmenu.php";
     $tel = $_POST['school_number'];
     $idSession = $_SESSION['idUser'];
     $idCreateur = $idSession;
-
 
     //REQUETE SQL POUR INSERER LES DONNEES DE L ECOLE 
     $sqlInsertEcole = "INSERT INTO `ecole`(`eco_nom`, `eco_ref`, `eco_adresse`, `eco_cp`, `eco_ville`, `eco_mail`, `eco_tel`) VALUES (:nom , :ref, :adresse, :cp, :ville, :mail, :tel) ";
@@ -40,14 +46,18 @@ require "navmenu.php";
         $sqlHistorique = "INSERT INTO `modifications`(`mdf_idEcole`, `mdf_idUser`, `mdf_date`, `mdf_type`) VALUES (:idEcole, :idUser, :laDate, :typeModif)";
         $res = $db->prepare($sqlHistorique);
         $exec = $res->execute(array(":idEcole"=>$last_id, ":idUser"=>$idSession, ":laDate"=>$laDate, ":typeModif"=>0));
-       
+        
         //REDIRECTION
         header('location: dashboard.php');
-    }
+        }
     //SINON FAIRE
     else{
         echo "Insertion echoué";
     }
+}
+else{
+    header('location: accueil.php');
+}
 
 
 

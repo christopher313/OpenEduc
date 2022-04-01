@@ -10,6 +10,8 @@ require "navmenu.php";
 //VARIABLE
 $userid = $_SESSION['idUser'];
 
+if(isset($userid)){
+
 //REQUETE SQL POUR RECUPERER LES DROITS ET LES INFO DU COMPTE LIE A L'ID DE LA SESSION
 $sql = "SELECT * FROM `droits` INNER JOIN ecole ON droits.dr_ecoId = ecole.eco_id WHERE dr_usrId = '$userid'";
 $recipesStatement = $db->prepare($sql);
@@ -63,6 +65,13 @@ $recipes = $recipesStatement->fetchAll();
 
 </body>
 </html>
+
+<?php
+}
+else{
+    header('location:accueil.php');
+}
+?>
 
 
 
