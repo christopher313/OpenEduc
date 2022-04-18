@@ -1,14 +1,10 @@
 <?php
-
 //PAGE PERMETTANT L'AJOUT D'UNE CLASSE DANS LA BASE DE DONNEES 
 
 //INITIALISATION
 include("database.php");
 session_start();
 require "navmenu.php";
-
-
-
 
 //VARIABLES
 if(isset($_POST['classes'])){
@@ -17,16 +13,10 @@ if(isset($_POST['classes'])){
     $effectif = $_POST['effectif'];
     $civilite = $_POST['civilite'];
 
-
-
-    if(isset($idSession)){
+    if(isset($_SESSION['idUser'])){
         $idSession = $_SESSION['idUser'];
         $ecoId = $_GET['id'];
     }
-
-
-
-
 
     //REQUETES SQL POUR AJOUTER LA CLASSE 
     $sql = "INSERT INTO `classe`(`cl_nomProf`, `cl_idEcole`, `cl_idNiveau`, `cl_effectif`, `cl_civilite`) VALUES (:nomProf, :idEcole, :niveau, :effectif, :civilite)";
@@ -40,7 +30,6 @@ if(isset($_POST['classes'])){
     $exec = $res->execute(array(":idEcole"=>$ecoId, ":idUser"=>$idSession, ":laDate"=>$laDate, ":typeModif"=>2));
 
     $lien = "page_ecole.php?id=" . $ecoId ;
-
 
     //REDIRECTION
     header('location: ' . $lien );

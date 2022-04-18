@@ -65,11 +65,11 @@ if(isset($_SESSION['idUser'])){
         <?php
     }
     else{
-        echo "Vous n'avez pas les droits d'accès a cette page";
+        header('location: accueil.php');
     }
 }
 else{
-    echo "Vous devez vous connecter";
+    header('location: accueil.php');
 }
 
 ?>
