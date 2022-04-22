@@ -3,8 +3,7 @@
 //PAGE TYPE POUR LES INFO ECOLE
 
 //INITIALISATION DE LA PAGE
-include("database.php");
-session_start();
+
 require "navmenu.php";
 
 //SI LA SESSION EXISTE L'ID SESSION = ID USER
@@ -96,100 +95,134 @@ $recipes = $recipesStatement->fetchAll();
 <html lang="FR">
 <head>
     <meta charset="UTF-8">
-    <link rel="stylesheet" href="../css/style.css">
+    <link rel="stylesheet" href="../css/style2.css">
     <title>OpenEduc - <?php echo $nomEcole ?></title>
 </head>
-<body>
+<body class="bg-light">
 
-<h1 class="title-h1"><?php echo $nomEcole ?></h1>
+<div class="container py-5 ">
 
-<div class="page_container">
-    <div class="info-ecole">
-        <div class="info-ecole-colonne">
-            <p><strong>Nom: </strong><?php echo $nomEcole ?></p>
-            <p><strong>Identifiant: </strong><?php echo $ref ?></p>
-            <p><strong>Adresse: </strong><?php echo $adresseEcole . " ". $cp . " " . $ville  ?> </p>
-            <p><strong>Téléphone: </strong><?php echo $eco_tel_decompose ?> </p>
-            <p><strong>Email: </strong><a href="<?php echo 'mailto:' . $eco_mail ?>"><?php echo $eco_mail ?> </a></p>
+    <h1 class="text-center"><?php echo $nomEcole ?></h1>
+
+    <div class="informations">
+        <div class="row bg-secondary border border-5 bg-opacity-50">
+            <div class="col">
+                <p><strong>Nom: </strong><?php echo $nomEcole ?></p>
+                <p><strong>Identifiant: </strong><?php echo $ref ?></p>
+                <p><strong>Adresse: </strong><?php echo $adresseEcole . " ". $cp . " " . $ville  ?> </p>
+                <p><strong>Téléphone: </strong><?php echo $eco_tel_decompose ?> </p>
+                <p><strong>Email: </strong><a href="<?php echo 'mailto:' . $eco_mail ?>"><?php echo $eco_mail ?> </a></p>
+            </div>
+            <div class="col">
+                <p><strong>Année scolaire: </strong> 2021/22</p>
+                <p><strong>Dernière mise à jour: </strong> 21-nov-21</p>
+                <p><strong>Administrateur: </strong><?php echo $creatorName?> </p>
+            </div>
         </div>
-        <div class="info-ecole-colonne">
-            <p><strong>Année scolaire: </strong> 2021/22</p>
-            <p><strong>Dernière mise à jour: </strong> 21-nov-21</p>
-            <p><strong>Administrateur: </strong><?php echo $creatorName?> </p>
-        </div>
-    </div>  
+    </div>
+
     <?php
 
 
 
     if($row_cnt>=1){?>
-        <a href="historique.php?id=<?php echo $ecoId ?>">Historique des modifications</a>
-        <a href="modification_ecole.php?id=<?php echo $ecoId ?>">Modifier les informations de l'école</a>
-        <a href="ajouter_classe.php?id=<?php echo $ecoId ?>">Ajouter une classe</a><?php
-        if($creatorId == $idSession){?>
-            <a href="droits.php?id=<?php echo $ecoId ?>">Gérer les droits</a><?php
-        }
-     }
-    ?>
-
-    <br/>
-    
-    <table>
-        <tr id="case-sombre">
-            <td>Niveau(x)</td>
-            <td>Professeur</td>
-            <td>Effectifs</td>
-            <td></td>
-        </tr>
-
-        <?php 
-        foreach($recipes as $recipe){
-            $listeNomProf[] = $recipe['cl_idNiveau'] . " de " . $recipe['cl_civilite'] . " ". $recipe['cl_nomProf'];
-            $listeEffectif[] = $recipe['cl_effectif'];
-            $listClasses[] = $recipe['cl_idNiveau'];  ?>
-        <tr>
-            <td><?php echo $recipe['cl_idNiveau']?></td>
-            <td><?php echo $recipe['cl_civilite'] . " " . $recipe['cl_nomProf']?></td>
-            <td><?php echo $recipe['cl_effectif']?></td>
-            <?php
-            if($row_cnt>0){?>
-                <td><a href="supprimer_classe.php?idClasse=<?php echo $recipe['cl_id']?>&id=<?php echo $ecoId?>">X</a></td>
-            <?php
-            }
-            ?>
-        </tr>
-            <?php
-            $totalEffectif = $totalEffectif + $recipe['cl_effectif'];
-            $boucle++;
-
-        }?>
+    <div class="row text-center py-4">
         
 
-        <tr id="case-demi-sombre">
-            <td>&nbsp</td>
-            <td>Total effectif école</td>
-            <td id="case-exception"><?php echo $totalEffectif ?></td>
-        </tr>
+        <div class="col">
+            <a class="btn btn-dark" href="historique.php?id=<?php echo $ecoId ?>"><i class="bi bi-clock-history"></i> Historique des modifications</a>
+        </div>
+            
+        <div class="col">
+            <a class="btn btn-dark" href="modification_ecole.php?id=<?php echo $ecoId ?>"><i class="bi bi-pencil-fill"></i> Modifier les informations de l'école</a>
+        </div>
 
-        <tr id="case-demi-sombre">
-            <td>&nbsp</td>
-            <td>Moyenne par classe</td>
-            <?php 
-            if($boucle>0){
-                $moyenneEffectif = $totalEffectif/$boucle;
-            }
-            else{
-                $moyenneEffectif = 0 ;
-            }
-            ?>
-            <td id="case-exception"><?php echo $moyenneEffectif ?></td>
-        </tr>
+        <div class="col">
+            <a class="btn btn-dark" href="ajouter_classe.php?id=<?php echo $ecoId ?>"><i class="bi bi-plus-square-fill"></i> Ajouter une classe</a>
+        </div>
+            
+        <?php
+            if($creatorId == $idSession){?>
+            <div class="col">
+                <a class="btn btn-dark" href="droits.php?id=<?php echo $ecoId ?>"> <i class="bi bi-people-fill"></i> Gérer les droits</a>
+            </div>
+                <?php
+            }?>
+    </div>
+    <?php
+    }
+    ?>
+
+    <div class="tableau py-4 ">
+
+        <div class="row">
+            <div class="col">
+                <table class="text-center">
+                    <tr id="case-sombre">
+                        <td>Niveau(x)</td>
+                        <td>Professeur</td>
+                        <td>Effectifs</td>
+                        <td></td>
+                    </tr>
+
+                    <?php 
+                    foreach($recipes as $recipe){
+                        $listeNomProf[] = $recipe['cl_idNiveau'] . " de " . $recipe['cl_civilite'] . " ". $recipe['cl_nomProf'];
+                        $listeEffectif[] = $recipe['cl_effectif'];
+                        $listClasses[] = $recipe['cl_idNiveau'];  ?>
+                    <tr>
+                        <td><?php echo $recipe['cl_idNiveau']?></td>
+                        <td><?php echo $recipe['cl_civilite'] . " " . $recipe['cl_nomProf']?></td>
+                        <td><?php echo $recipe['cl_effectif']?></td>
+                        <?php
+                        if($row_cnt>0){?>
+                            <td><a href="supprimer_classe.php?idClasse=<?php echo $recipe['cl_id']?>&id=<?php echo $ecoId?>"><i class="bi bi-trash-fill"></i></a></td>
+                        <?php
+                        }
+                        ?>
+                    </tr>
+                        <?php
+                        $totalEffectif = $totalEffectif + $recipe['cl_effectif'];
+                        $boucle++;
+
+                    }?>
+                    
+
+                    <tr id="case-demi-sombre">
+                        <td>&nbsp</td>
+                        <td>Total effectif école</td>
+                        <td id="case-exception"><?php echo $totalEffectif ?></td>
+                    </tr>
+
+                    <tr id="case-demi-sombre">
+                        <td>&nbsp</td>
+                        <td>Moyenne par classe</td>
+                        <?php 
+                        if($boucle>0){
+                            $moyenneEffectif = $totalEffectif/$boucle;
+                        }
+                        else{
+                            $moyenneEffectif = 0 ;
+                        }
+                        ?>
+                        <td id="case-exception"><?php echo $moyenneEffectif ?></td>
+                    </tr>
+                </table> 
+            </div>
+
+            <div class="col">
+
+            </div>
+
+        </div>
+        
+        
+    </div>
+
+</div>
 
 
-
-
-       
-    </table>
+   
 
 
 <!-- Génération d'un graphique représentant les effectifs de chaque écoles.-->

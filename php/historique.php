@@ -3,8 +3,7 @@
 //PAGE D'ACCUEIL
 
 //INITIALISATION DE LA PAGE
-include("database.php");
-session_start();
+
 require "navmenu.php";
 
 
@@ -43,38 +42,45 @@ if($row_cnt>0){
     <link rel="icon" href="img/Copie de OPEN.png">
     <title>Historique des modifications de <?php echo ad?></title>
 </head>
+
 <body>
 
-<div class="historique-container">
-<ul>
-    <?php
+<div class="container">
+    <h1 class="text-center py-4">Historique des modifications</h1>
 
-
-
-
-        foreach($recipes as $recipe){
-            $typeModif = $recipe['mdf_type'];
-            switch($typeModif){
-                case 0:
-                    $typeModif = "a ouvert le profil ";
-                    break;
-                case 1:
-                    $typeModif = "a supprimé une classe ";
-                    break;
-                case 2:
-                    $typeModif = "a ajouté une classe ";
-                    break;
-                case 3:
-                    $typeModif = "a modifié les informations ";
-                    break;
-            }
-            ?>
-            <li ><div class="historique-box"><a class="historique-item"><?php echo $recipe['mdf_date'] . " | " . $recipe['ct_username'] . " " .  $typeModif . " de ". $recipe['eco_nom']; ?></a></div></li>
+    <ul class="list-unstyled">
         <?php
-        }
-    ?>
-</ul>
+
+            foreach($recipes as $recipe){
+                $typeModif = $recipe['mdf_type'];
+                switch($typeModif){
+                    case 0:
+                        $typeModif = "a ouvert le profil ";
+                        break;
+                    case 1:
+                        $typeModif = "a supprimé une classe ";
+                        break;
+                    case 2:
+                        $typeModif = "a ajouté une classe ";
+                        break;
+                    case 3:
+                        $typeModif = "a modifié les informations ";
+                        break;
+                }
+                ?>
+
+                    <li ><i class="bi bi-clock-history"> </i><?php echo $recipe['mdf_date'] ?><div class="bg-dark text-white my-2 py-3 px-1"><?php echo " " . $recipe['ct_username'] . " " .  $typeModif . " de ". $recipe['eco_nom']; ?></div></li>
+                
+            <?php
+            }
+        ?>
+    </ul>
+
 </div>
+
+
+    
+
    
     
 

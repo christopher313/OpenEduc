@@ -3,8 +3,7 @@
 //PAGE DE TRAITEMENT POUR AJOUTER UNE ECOLE DANS LA BDD
 
 //INITIALISATION DE LA PAGE
-include("database.php");
-session_start();
+
 require "navmenu.php";
 
 //SI UTILISATEUR A PAS LE ROLE 1 OU 2 FAIRE

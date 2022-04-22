@@ -3,8 +3,7 @@
 //PAGE DE TRAITEMENT POUR AJOUTER LES DROITS UTILISATEURS 
 
 //INITIALISATION DE LA PAGE
-include("database.php");
-session_start();
+
 require "navmenu.php";
 
 

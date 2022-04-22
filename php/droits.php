@@ -1,8 +1,7 @@
 <?php
 
 //INITIALISATION DE LA PAGE
-include("database.php");
-session_start();
+
 require "navmenu.php";
 
 

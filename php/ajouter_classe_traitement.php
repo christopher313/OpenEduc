@@ -2,8 +2,6 @@
 //PAGE PERMETTANT L'AJOUT D'UNE CLASSE DANS LA BASE DE DONNEES 
 
 //INITIALISATION
-include("database.php");
-session_start();
 require "navmenu.php";
 
 //VARIABLES

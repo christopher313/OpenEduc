@@ -3,8 +3,7 @@
 //PAGE DE TRAITEMENT PERMETTANT DE SUPPRIMER UNE CLASSE D'UNE ECOLE
 
 //INITIALISATION DE LA PAGE
-include("database.php");
-session_start();
+
 require "navmenu.php";
 
 if(isset($_SESSION['idUser'])){

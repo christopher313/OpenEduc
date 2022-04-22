@@ -3,8 +3,7 @@
 //PAGE FORMULAIRE DE CONNEXION
 
 //INITIALISATION DE LA PAGE
-include("database.php");
-session_start();
+
 require "navmenu.php";
 
 ?>
@@ -16,20 +15,45 @@ require "navmenu.php";
     <link rel="stylesheet" href="../css/style.css">
     <title>OpenEduc - Connexion </title>
 </head>
-<body>
-    <div class="page_container">
+<body class="bg-light">
 
 
-        <h1 class="title-h1">Connexion</h1>
-        <br>
-        <div class="content_connect">
-        <img id="ico" src="../img/OPEN2.png">
-        <form action="" method="post" class="formulaire_connexion">
-            <input class="champ" type="text" placeholder="Nom d'utilisateur ou email" name="username">
-            <input class="champ" type="password" placeholder="Mot de passe" name="password">
-            <input class="button" type="submit" value="Se connecter" name="bouton_envoie">
-        </form>
+
+    <div class="container py-5 text-center">
+
+        <h1>Connexion</h1>
+
+        <img src="../img/open-t-n.png" alt="logoopen" style="height:250px">
+
+    
+        <div class="row">
+
+            <div class="col-3">
+                
+            </div>
+
+            <div class="col-6">
+
+                <form action="" method="post" class="d-flex flex-column">
+                    <div class="mb-3">
+                        <input class="form-control text-center" type="text" placeholder="Nom d'utilisateur" name="username" style="font-size: 22px;">
+                    </div>
+                    <div class="mb-3">
+                        <input class="form-control text-center h6" type="password" placeholder="Mot de passe" name="password" style="font-size: 22px;">
+                    </div>
+                    <input class="btn btn-dark p-3" type="submit" value="Se connecter" name="bouton_envoie">
+                </form>
+
+            </div>
+
+            <div class="col-3">
+
+            </div>
+
+
         </div>
+            
+
 
         <?php 
 
@@ -54,7 +78,6 @@ require "navmenu.php";
             //SI USER ET MDP SONT JUSTE ALORS
             $row_cnt = $recipesStatement->rowCount();
             if($row_cnt == 1){
-                session_start();
                 $_SESSION['idUser'] = $donnees['ct_id'];
                 $_SESSION['user'] = $user;
                 $_SESSION['role'] = $donnees['ct_role'];

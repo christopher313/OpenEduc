@@ -1,8 +1,6 @@
 <?php
 
 //INITIALISATION DE LA PAGE
-include("database.php");
-session_start();
 require "navmenu.php";
 ?>
 
@@ -15,13 +13,17 @@ require "navmenu.php";
 </head>
 <body>
 
-<div class="page_container">
+<div class="container text-center py-5">
+
     <h1 class="title-h1">A propos</h1>
 
-    <div class="about-content">
-        <img id="img-about" src="../img/enfants-en-classe.jpg"/>
-    </div>
+    <img id="img-about" src="../img/enfants-en-classe.jpg" style="height: 550px"/>
+
+
 </div>
+    
+
+
 
 
     

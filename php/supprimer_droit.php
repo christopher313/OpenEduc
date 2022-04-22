@@ -3,8 +3,7 @@
 //PAGE DE TRAITEMENT POUR SUPPRIMER LES DROITS LIE A L'UTILISATEUR
 
 //INITIALISATION DE LA PAGE
-include("database.php");
-session_start();
+
 require "navmenu.php";
 
 //VARIABLES

@@ -3,8 +3,7 @@
 //PAGE DE RESULTAT DE RECHERCHE D'ECOLE
 
 //INITIALISATION DE LA PAGE
-include("database.php");
-session_start();
+
 require "navmenu.php";
 
 //VARIABLE
@@ -34,22 +33,20 @@ if(empty($_GET['search-bar']) || ($_GET['search-bar'] == " ")){
 </head>
 <body>
 
-    <div class="recherche-item">
+<div class="container">
+
+    <h1 class="text-center py-5">Recherche d'ecoles</h1>
+
+    <div class="recherche text-center">
         <form action="recherche_ecole.php" method="get" class="recherche">
-            <input type="text" placeholder="Ecrire ici..." name="search-bar" class="champ"/>
+            <input type="search" placeholder="Ecrire ici..." name="search-bar" class="champ"/>
             <input type="submit" value="Rechercher" name="search-button" class="button"/>
         </form>
     </div>
 
+    <div class="resultats">
+        <h1 class="title-h1">Resultats pour <?php echo $_GET['search-bar']?></h1>
 
-    <h1 class="title-h1">Resultats pour <?php echo $_GET['search-bar']?></h1>
-
-    <div class="page_container">
-
-    
-
-
-    <br/>
         <ul>
             <?php 
 
@@ -67,6 +64,25 @@ if(empty($_GET['search-bar']) || ($_GET['search-bar'] == " ")){
             ?>
             
         </ul>
+
+    </div>
+
+   
+
+</div>
+
+
+
+
+    
+
+    <div class="page_container">
+
+    
+
+
+    <br/>
+        
 
       
 

@@ -3,8 +3,7 @@
 //PAGE DE TRAITEMENT POUR SUPPRIMER UNE ECOLE EN FONCTION DE LA REFERANCE DE L'ECOLE
 
 //INITIALISATION DE LA PAGE
-include("database.php");
-session_start();
+
 require "navmenu.php";
 
 //VARIABLE
