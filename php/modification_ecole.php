@@ -42,33 +42,63 @@ if(isset($_SESSION['idUser'])){
 
         <div class="container text-center py-5">
             <h1>Modifications des informations de <?php echo $donnees['eco_nom'] ?></h1>
+            
 
             <div class="row">
-                <div class="col-2 d-flex flex-column text-end">
-                    <label for="nom" class="form-label m-2">Nom de l'école: </label>
-                    <label for="ref" class="form-label ">Référence: </label>
-                    <label for="adresse" class="form-label m-2">Adresse: </label>
-                    <label for="cp" class="form-label m-2">Code Postal: </label>
-                    <label for="ville" class="form-label m-2">Ville: </label>
-                    <label for="email" class="form-label m-2">Email: </label>
-                    <label for="tel" class="form-label m-2">Tél: </label>
+            
+                <div class="col-3">
+                    
                 </div>
 
-                <div class="col">
+                <div class="col-6 d-flex flex-column text-start">
+
+
                     <form action="modification_ecole_traitement.php?id=<?php echo $ecoId ?>" method="post" class="d-flex flex-column">
-                        <input class="m-2" id="nom" type="text" placeholder="Nom de l'école" name="school_name" value="<?php echo $donnees['eco_nom']?>" required></label>
-                        <input class="m-2" type="text" placeholder="Référence" name="school_ref" value="<?php echo $donnees['eco_ref']?>" required></label>
-                        <input class="m-2" type="text" placeholder="Adresse" name="school_adresse" value="<?php echo $donnees['eco_adresse']?>" required></label>
-                        <input class="m-2" type="number" placeholder="Code Postal" name="school_cp" value="<?php echo $donnees['eco_cp']?>" required></label>
-                        <input class="m-2" type="text" placeholder="Ville" name="school_city" value="<?php echo $donnees['eco_ville']?>" required></label>
-                        <input class="m-2" type="mail" placeholder="Mail" name="school_mail" value="<?php echo $donnees['eco_mail']?>" required></label>
-                        <input class="m-2" type="tel" placeholder="Numéro de téléphone" name="school_number" value="<?php echo $donnees['eco_tel']?>" required></label>
+
+                        <div class="form-group">
+                            <label for="nom" class="form-label">Nom de l'école: </label>
+                            <input class="form-control" id="nom" type="text" placeholder="Nom de l'école" name="school_name" value="<?php echo $donnees['eco_nom']?>" required>
+                        </div>
+
+                        <div class="form-group">
+                            <label for="ref" class="form-label">Référence: </label>
+                            <input class="form-control" type="text" placeholder="Référence" name="school_ref" value="<?php echo $donnees['eco_ref']?>" required>
+                        </div>
+
+                        <div class="form-group">
+                            <label for="adresse" class="form-label">Adresse: </label>
+                            <input class="form-control" type="text" placeholder="Adresse" name="school_adresse" value="<?php echo $donnees['eco_adresse']?>" required>
+                        </div>
+
+                        <div class="form-group">
+                            <label for="cp" class="form-label">Code Postal: </label>
+                            <input class="form-control" type="number" placeholder="Code Postal" name="school_cp" value="<?php echo $donnees['eco_cp']?>" required>
+                        </div>
+
+                        <div class="form-group">
+                            <label for="ville" class="form-label">Ville: </label>
+                            <input class="form-control" type="text" placeholder="Ville" name="school_city" value="<?php echo $donnees['eco_ville']?>" required>
+                        </div>
+
+                        <div class="form-group">
+                            <label for="email" class="form-label">Email: </label>
+                            <input class="form-control" type="mail" placeholder="Mail" name="school_mail" value="<?php echo $donnees['eco_mail']?>" required>
+                        </div>
+
+
+                        <div class="form-group">
+                            <label for="tel" class="form-label">Tél: </label>
+                            <input class="form-control" type="tel" placeholder="Numéro de téléphone" name="school_number" value="<?php echo $donnees['eco_tel']?>" required>
+                        </div>
+
                         <label style="text-align: left; font-size: 0.8em; margin-bottom: 15px;">Les champs avec un astérique, sont des champs obligatoires.</label>
                         <input class="btn btn-dark" type="submit" value="Modifier" name="bouton_envoie">
-                    </form>
+
+                    </form>               
+                                 
                 </div>
 
-                <div class="col-2">
+                <div class="col-3">
 
                 </div>
 

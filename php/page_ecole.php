@@ -95,7 +95,7 @@ $recipes = $recipesStatement->fetchAll();
 <html lang="FR">
 <head>
     <meta charset="UTF-8">
-    <link rel="stylesheet" href="../css/style2.css">
+    <link rel="stylesheet" href="../css/style.css">
     <title>OpenEduc - <?php echo $nomEcole ?></title>
 </head>
 <body class="bg-light">
@@ -104,14 +104,14 @@ $recipes = $recipesStatement->fetchAll();
 
     <h1 class="text-center"><?php echo $nomEcole ?></h1>
 
-    <div class="informations">
-        <div class="row bg-secondary border border-5 bg-opacity-50">
+    <div class="informations pb-4">
+        <div class="row bg-dark border border-5 border-dark text-white">
             <div class="col">
                 <p><strong>Nom: </strong><?php echo $nomEcole ?></p>
                 <p><strong>Identifiant: </strong><?php echo $ref ?></p>
                 <p><strong>Adresse: </strong><?php echo $adresseEcole . " ". $cp . " " . $ville  ?> </p>
                 <p><strong>Téléphone: </strong><?php echo $eco_tel_decompose ?> </p>
-                <p><strong>Email: </strong><a href="<?php echo 'mailto:' . $eco_mail ?>"><?php echo $eco_mail ?> </a></p>
+                <p><strong>Email: </strong><a class="link-light" href="<?php echo 'mailto:' . $eco_mail ?>"><?php echo $eco_mail ?> </a></p>
             </div>
             <div class="col">
                 <p><strong>Année scolaire: </strong> 2021/22</p>
@@ -126,7 +126,7 @@ $recipes = $recipesStatement->fetchAll();
 
 
     if($row_cnt>=1){?>
-    <div class="row text-center py-4">
+    <div class="row text-center pb-4">
         
 
         <div class="col">
@@ -138,7 +138,7 @@ $recipes = $recipesStatement->fetchAll();
         </div>
 
         <div class="col">
-            <a class="btn btn-dark" href="ajouter_classe.php?id=<?php echo $ecoId ?>"><i class="bi bi-plus-square-fill"></i> Ajouter une classe</a>
+            <a class="btn btn-dark" href="ajouter_classe.php?id=<?php echo $ecoId ?>"><i class="bi bi-plus-circle"></i> Ajouter une classe</a>
         </div>
             
         <?php
@@ -153,178 +153,173 @@ $recipes = $recipesStatement->fetchAll();
     }
     ?>
 
-    <div class="tableau py-4 ">
+        <div class="tableau bg-dark ">
 
-        <div class="row">
-            <div class="col">
-                <table class="text-center">
-                    <tr id="case-sombre">
-                        <td>Niveau(x)</td>
-                        <td>Professeur</td>
-                        <td>Effectifs</td>
-                        <td></td>
-                    </tr>
+            <table class=" table text-center">
+                <tr id="case-sombre">
+                    <td>Niveau(x)</td>
+                    <td>Professeur</td>
+                    <td>Effectifs</td>
+                    <td></td>
+                </tr>
 
+                <?php 
+                foreach($recipes as $recipe){
+                    $listeNomProf[] = $recipe['cl_idNiveau'] . " de " . $recipe['cl_civilite'] . " ". $recipe['cl_nomProf'];
+                    $listeEffectif[] = $recipe['cl_effectif'];
+                    $listClasses[] = $recipe['cl_idNiveau'];  ?>
+                <tr>
+                    <td><?php echo $recipe['cl_idNiveau']?></td>
+                    <td><?php echo $recipe['cl_civilite'] . " " . $recipe['cl_nomProf']?></td>
+                    <td><?php echo $recipe['cl_effectif']?></td>
+                    <?php
+                    if($row_cnt>0){?>
+                        <td><a class="link-dark" href="supprimer_classe.php?idClasse=<?php echo $recipe['cl_id']?>&id=<?php echo $ecoId?>"><i class="bi bi-trash-fill"></i></a></td>
+                    <?php
+                    }
+                    else{?>
+                        <td>&nbsp</td><?php
+                    }
+                    ?>
+                </tr>
+                    <?php
+                    $totalEffectif = $totalEffectif + $recipe['cl_effectif'];
+                    $boucle++;
+
+                }?>
+                
+
+                <tr id="case-demi-sombre">
+                    <td>&nbsp</td>
+                    <td>Total effectif école</td>
+                    <td id="case-exception"><?php echo $totalEffectif ?></td>
+                </tr>
+
+                <tr id="case-demi-sombre">
+                    <td>&nbsp</td>
+                    <td>Moyenne par classe</td>
                     <?php 
-                    foreach($recipes as $recipe){
-                        $listeNomProf[] = $recipe['cl_idNiveau'] . " de " . $recipe['cl_civilite'] . " ". $recipe['cl_nomProf'];
-                        $listeEffectif[] = $recipe['cl_effectif'];
-                        $listClasses[] = $recipe['cl_idNiveau'];  ?>
-                    <tr>
-                        <td><?php echo $recipe['cl_idNiveau']?></td>
-                        <td><?php echo $recipe['cl_civilite'] . " " . $recipe['cl_nomProf']?></td>
-                        <td><?php echo $recipe['cl_effectif']?></td>
-                        <?php
-                        if($row_cnt>0){?>
-                            <td><a href="supprimer_classe.php?idClasse=<?php echo $recipe['cl_id']?>&id=<?php echo $ecoId?>"><i class="bi bi-trash-fill"></i></a></td>
-                        <?php
-                        }
-                        ?>
-                    </tr>
-                        <?php
-                        $totalEffectif = $totalEffectif + $recipe['cl_effectif'];
-                        $boucle++;
-
-                    }?>
-                    
-
-                    <tr id="case-demi-sombre">
-                        <td>&nbsp</td>
-                        <td>Total effectif école</td>
-                        <td id="case-exception"><?php echo $totalEffectif ?></td>
-                    </tr>
-
-                    <tr id="case-demi-sombre">
-                        <td>&nbsp</td>
-                        <td>Moyenne par classe</td>
-                        <?php 
-                        if($boucle>0){
-                            $moyenneEffectif = $totalEffectif/$boucle;
-                        }
-                        else{
-                            $moyenneEffectif = 0 ;
-                        }
-                        ?>
-                        <td id="case-exception"><?php echo $moyenneEffectif ?></td>
-                    </tr>
-                </table> 
-            </div>
-
-            <div class="col">
-
-            </div>
-
+                    if($boucle>0){
+                        $moyenneEffectif = $totalEffectif/$boucle;
+                    }
+                    else{
+                        $moyenneEffectif = 0 ;
+                    }
+                    ?>
+                    <td id="case-exception"><?php echo $moyenneEffectif ?></td>
+                </tr>
+            </table> 
+        
         </div>
-        
-        
-    </div>
 
-</div>
+                <!-- Génération d'un graphique représentant les effectifs de chaque écoles.-->
+
+        <div style='position: relative;  margin-top:30px; margin-bottom:30px;'>
+        <canvas id="myChart"></canvas>
+        </div>
+
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/3.7.1/chart.min.js" 
+        integrity="sha512-QSkVNOCYLtj73J4hbmVoOV6KVZuMluZlioC+trLpewV8qMjsWqlIQvkn1KGX2StWvPMdWGBqim1xlC8krl1EKQ==" 
+        crossorigin="anonymous" 
+        referrerpolicy="no-referrer"></script>
+        <script>
+        const ctx = document.getElementById('myChart').getContext('2d');
+
+        const myChart = new Chart(ctx, {
+            type: 'bar',
+            data: {
+                labels: [<?php foreach($listeNomProf as $prof){
+                    echo '"'. $prof . '",';
+                }  ?>] ,
+                datasets: [{
+                    label: 'effectifs des classes',
+                    data: [<?php foreach($listeEffectif as $effectif){
+                        echo '"'. $effectif . '",';
+                    }
+                    ?>],
+                    backgroundColor: [
+                            <?php foreach($listClasses as $classe)
+                            {
+                                switch($classe)
+                                {
+                                    case "CP":
+                                        ?>
+                                        'rgba(23, 99, 132, 0.2)',
+                                        <?php
+                                    break;
+                                    case "CP/CE1":
+                                        ?>
+                                        'rgba(54, 162, 235, 0.2)',
+                                        <?php
+                                    break;
+                                    case "CE1":
+                                        ?>
+                                        'rgba(255, 206, 86, 0.2)',
+                                        <?php
+                                    break;
+                                    case "CE1/CE2":
+                                        ?>
+                                        'rgba(75, 192, 192, 0.2)',
+                                        <?php
+                                    break;
+                                    case "CE2":
+                                        ?>
+                                        'rgba(153, 102, 255, 0.2)',
+                                        <?php
+                                    break;
+                                    case "CE2/CM1":
+                                        ?>
+                                        'rgba(255, 159, 64, 0.2)',
+                                        <?php
+                                    break;
+                                    case "CM1":
+                                        ?>
+                                        'rgba(204, 63, 63, 0.2)',
+                                        <?php
+                                    break;
+                                    case "CM1/CM2":
+                                        ?>
+                                        'rgba(140, 66, 16, 0.2)',
+                                        <?php
+                                    break;
+                                    case "CM2":
+                                        ?>
+                                        'rgba(47, 103, 25, 0.2)',
+                                        <?php
+                                    break;
+                                }
+                            }
+                        
+                            ?>
+                    ]
+                }]
+            },
+            options: {
+                plugins: {
+                    legend: {
+                        display: true,
+                        labels: {
+                            color: 'rgb(000, 000, 000)',
+                        }
+                    }
+                },
+                responsive: true,
+                scales: {
+                    y: {
+                        beginAtZero: true
+                    }
+                }
+            }
+        });
+        </script>
+
+    </div>
 
 
    
 
 
-<!-- Génération d'un graphique représentant les effectifs de chaque écoles.-->
 
-<div style='position: relative;  margin-top:30px; margin-bottom:30px;'>
-<canvas id="myChart"></canvas>
-</div>
-
-<script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/3.7.1/chart.min.js" 
-integrity="sha512-QSkVNOCYLtj73J4hbmVoOV6KVZuMluZlioC+trLpewV8qMjsWqlIQvkn1KGX2StWvPMdWGBqim1xlC8krl1EKQ==" 
-crossorigin="anonymous" 
-referrerpolicy="no-referrer"></script>
-<script>
-const ctx = document.getElementById('myChart').getContext('2d');
-
-const myChart = new Chart(ctx, {
-    type: 'bar',
-    data: {
-        labels: [<?php foreach($listeNomProf as $prof){
-            echo '"'. $prof . '",';
-        }  ?>] ,
-        datasets: [{
-            label: 'effectifs des classes',
-            data: [<?php foreach($listeEffectif as $effectif){
-                echo '"'. $effectif . '",';
-            }
-             ?>],
-            backgroundColor: [
-                    <?php foreach($listClasses as $classe)
-                    {
-                        switch($classe)
-                        {
-                            case "CP":
-                                ?>
-                                'rgba(23, 99, 132, 0.2)',
-                                <?php
-                            break;
-                            case "CP/CE1":
-                                ?>
-                                'rgba(54, 162, 235, 0.2)',
-                                <?php
-                            break;
-                            case "CE1":
-                                ?>
-                                'rgba(255, 206, 86, 0.2)',
-                                <?php
-                            break;
-                            case "CE1/CE2":
-                                ?>
-                                'rgba(75, 192, 192, 0.2)',
-                                <?php
-                            break;
-                            case "CE2":
-                                ?>
-                                 'rgba(153, 102, 255, 0.2)',
-                                <?php
-                            break;
-                            case "CE2/CM1":
-                                ?>
-                                 'rgba(255, 159, 64, 0.2)',
-                                <?php
-                            break;
-                            case "CM1":
-                                ?>
-                                'rgba(204, 63, 63, 0.2)',
-                                <?php
-                            break;
-                            case "CM1/CM2":
-                                ?>
-                                'rgba(140, 66, 16, 0.2)',
-                                <?php
-                            break;
-                            case "CM2":
-                                ?>
-                                'rgba(47, 103, 25, 0.2)',
-                                <?php
-                            break;
-                        }
-                    }
-                
-                    ?>
-            ]
-        }]
-    },
-    options: {
-        plugins: {
-            legend: {
-                display: true,
-                labels: {
-                    color: 'rgb(000, 000, 000)',
-                }
-            }
-        },
-        responsive: true,
-        scales: {
-            y: {
-                beginAtZero: true
-            }
-        }
-    }
-});
-</script>
 
 
 

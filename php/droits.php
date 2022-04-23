@@ -43,48 +43,82 @@ if($donnees_droit2['dr_creatorId'] == $_SESSION['idUser']){
     <link rel="stylesheet" href="../css/style.css">
     <title>OpenEduc - Gestionnaire de droits</title>
 </head>
-<body>
+<body class="bg-light">
 
-<h1 class="title-h1">Gestion des droits de <?php echo $donnees['eco_nom'] ?> </h1>
+    <div class="container py-5">
 
-
-<div class="page_container">
-
-    <div class="tableau">
-    <h2>Utilisateurs</h2>
-
-        <table>
-            <tr id="case-sombre">
-                <td>Utilisateur(s)</td>
-                <td>&nbsp</td>
-            </tr>
-
-            <?php 
-            foreach($donnees_droit as $donnee_droit){ ?>
-            <tr>
-                <td><?php echo $donnee_droit['ct_username']?></td><?php
-                    if($donnee_droit['dr_creatorId']== $_SESSION['idUser']){?>
-                        <td><a href="supprimer_droit.php?idDroit=<?php echo $donnee_droit['dr_id']?>&idEcole=<?php echo $ecoId ?>">X</a></td><?php
-                    }?>
-            </tr><?php
-            }?>
-                
-
-        </table>
-                
+        <h1 class="text-center">Gestion des droits de <?php echo $donnees['eco_nom'] ?></h1>
         
 
-    </div>
+
+        <div class="row">
+            <div class="col-3"></div>
+
+            <div class="col-6">
+                
+                <form action="ajouter_droit_utilisateur.php?id=<?php echo $ecoId?>" method="post" class="text-center d-flex ">
+                        <input type="text" class="form-control" placeholder="Nom d'utilisateur" name="user_droit"/>
+                        <input type="HIDDEN" value="<?php echo $ecoId ?>" name="eco_id"/>
+                        <input type="submit" class="btn btn-dark" value="Ajouter" name="bouton_droit"/>
+                </form>
+
+            </div>
+            
+            <div class="col-3">
+
+            </div>
+        </div>
+
         
+        
+        <div class="row py-5">
 
+            <div class="col-2">
+                
+            </div>
+
+            <div class="col-8">
+                <table class="table">
+                    <tr id="case-sombre">
+                        <td>Utilisateur(s)</td>
+                        <td>&nbsp</td>
+                    </tr>
+
+                    <?php 
+                    foreach($donnees_droit as $donnee_droit){ ?>
+                    <tr>
+                        <td><?php echo $donnee_droit['ct_username']?></td><?php
+                            if($donnee_droit['dr_creatorId']!= $donnee_droit['dr_usrId']){
+                                ?>
+                                <td><a class="link-dark" href="supprimer_droit.php?idDroit=<?php echo $donnee_droit['dr_id']?>&idEcole=<?php echo $ecoId ?>"><i class="bi bi-trash-fill"></i></a></td><?php
+                            }
+                            else{?>
+                                <td>&nbsp</td><?php
+                            }
+                            ?>
+                    </tr><?php
+                    }?>        
+                </table>
+            </div>
+            
+
+            <div class="col-2">
+
+            </div>
+
+        </div>
+        
     </div>
 
 
-        <form action="ajouter_droit_utilisateur.php?id=<?php echo $ecoId?>" method="post" class="formulaire_connexion">
-            <input type="text" class="champ" placeholder="Nom d'utilisateur" name="user_droit"/>
-            <input type="HIDDEN" value="<?php echo $ecoId ?>" name="eco_id"/>
-            <input type="submit" class="bouton" value="Ajouter" name="bouton_droit"/>
-        </form>
+
+
+
+        
+                
+
+
+
 
 
 

@@ -35,17 +35,14 @@ if(empty($_GET['search-bar']) || ($_GET['search-bar'] == " ")){
 
 <div class="container">
 
-    <h1 class="text-center py-5">Recherche d'ecoles</h1>
-
-    <div class="recherche text-center">
-        <form action="recherche_ecole.php" method="get" class="recherche">
-            <input type="search" placeholder="Ecrire ici..." name="search-bar" class="champ"/>
-            <input type="submit" value="Rechercher" name="search-button" class="button"/>
-        </form>
+    <div class="titre pt-5 ">
+        <h1 class="text-center">Recherche d'ecoles</h1>
     </div>
+    
+    
 
-    <div class="resultats">
-        <h1 class="title-h1">Resultats pour <?php echo $_GET['search-bar']?></h1>
+    <div class="resultats pt-3">
+        <h1>Resultats pour <?php echo $_GET['search-bar']?></h1>
 
         <ul>
             <?php 
@@ -57,7 +54,7 @@ if(empty($_GET['search-bar']) || ($_GET['search-bar'] == " ")){
             //SINON AFFICHER LES RESULTAT SOUS FORME DE LISTE 
             else{
                 foreach($recipes as $recipe){?>
-                    <li><a href="page_ecole.php?id=<?php echo $recipe['eco_id']?>"><?php echo $recipe['eco_nom']?> </li><?php
+                    <li><a class="text-decoration-none" href="page_ecole.php?id=<?php echo $recipe['eco_id']?>"><?php echo $recipe['eco_nom']?> </li><?php
                 }
             }
             

@@ -30,53 +30,43 @@ $recipes = $recipesStatement->fetchAll();
 </head>
 <body class="bg-light">
 
-<!-- <h1 class="title-h1">DASHBOARD ADMINISTRATEUR - OPENEDUC</h1>
-
-<div class="page_container">
-    <div class="line_column">
-        <div class="column">
-            <div class="item-column">
-
-                <h2>MES ECOLES</h2>
-                <ul>
-                    <?php 
-                    //CREER UNE LISTE DES ECOLES OU L'UTILISATEUR A LES DROITS DE MODIFICATIONS
-                    foreach($recipes as $recipe){?>
-                        <li><a href="<?php echo 'page_ecole.php?id='.$recipe['eco_id'] ?>"><?php echo $recipe['eco_nom']?><?php
-                         if($recipe['dr_creatorId'] == $_SESSION['idUser'] ){?>
-                            <a href="<?php echo 'supprimer_ecole.php?id='.$recipe['eco_id']?>" id="delete">X</a></li><?php
-                         }   
-                    }?>
-                </ul>
-            </div>
-            <div class="item-button-column">
-                
-            </div>
-        </div>
-
-    </div>
-</div> -->
 
 <div class="container text-center py-5">
 
     <h1 class="title-h1">DASHBOARD ADMINISTRATEUR</h1>
+
+    <a href="ajouter_ecole.php" class="btn btn-dark text-decoration-none text-white py-2 my-2 text-center"><i class="bi bi-plus-circle"></i> Ajouter une école</a>
+
 
     <div class="row">
         <div class="col-2">
 
         </div>
 
-        <div class="col-8 p-2 bg-secondary border border-5 bg-opacity-50">
-            <ul class="list-unstyled">
-                <?php 
-                //CREER UNE LISTE DES ECOLES OU L'UTILISATEUR A LES DROITS DE MODIFICATIONS
-                foreach($recipes as $recipe){?>
-                    <li><a class="text-decoration-none " href="<?php echo 'page_ecole.php?id='.$recipe['eco_id'] ?>"><?php echo $recipe['eco_nom']?><?php
-                        if($recipe['dr_creatorId'] == $_SESSION['idUser'] ){?>
-                        <a href="<?php echo 'supprimer_ecole.php?id='.$recipe['eco_id']?>" id="delete"><i class="bi bi-trash-fill"></i></a></li><?php
-                        }   
-                }?>
-            </ul>
+        <div class="col-8 p-2">
+
+
+        <!-- //CREER UNE LISTE DES ECOLES OU L'UTILISATEUR A LES DROITS DE MODIFICATIONS -->
+                <table class="table">
+                    <tr id="case-sombre">
+                        <td>Nom de l'école</td>
+                        <td>&nbsp</td>
+                    </tr>
+
+                    <?php 
+                    foreach($recipes as $recipe){ ?>
+                    <tr>
+                        <td><a class="link-dark text-decoration-none" href="<?php echo 'page_ecole.php?id='.$recipe['eco_id'] ?>"><?php echo $recipe['eco_nom']?></a></td><?php
+                            if($recipe['dr_creatorId']== $_SESSION['idUser']){?>
+                                <td><a class="link-dark" href="supprimer_ecole.php?id=<?php echo $recipe['eco_id']?>"><i class="bi bi-trash-fill"></i></a></td><?php
+                            }
+                            else{?>
+                                <td>&nbsp</td><?php
+                            }?>
+                    </tr><?php
+                    }?>        
+                </table>
+
         </div>
 
         <div class="col-2">
@@ -84,9 +74,6 @@ $recipes = $recipesStatement->fetchAll();
         </div>
     </div>
 
-    <div class="btn btn-dark my-4 px-4 py-3">
-        <a href="ajouter_ecole.php" class="text-decoration-none h1 text-white">+</a>
-    </div>
     
 
 </div>

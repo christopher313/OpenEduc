@@ -1,0 +1,55 @@
+table {
+    border-collapse: collapse;
+    letter-spacing: 1px;
+    font-size: 0.8rem;
+}
+
+td,
+th {
+    border: 0px solid #212529;
+    padding: 10px 20px;
+}
+
+th {
+    background-color: rgb(235, 235, 235);
+}
+
+td {
+    text-align: center;
+}
+
+tr:nth-child(even) td {
+    background-color: rgb(255, 255, 255);
+}
+
+tr:nth-child(odd) td {
+    background-color: rgb(255, 255, 255);
+}
+
+caption {
+    padding: 10px;
+}
+
+#case-sombre td {
+    background-color: #212529;
+    color: white;
+}
+
+#case-demi-sombre td {
+    background-color: #212529;
+    color: white;
+}
+
+#case-exception {
+    background-color: white;
+    color: black;
+}
+
+#delete {
+    margin-left: 50px;
+}
+
+#input {
+
+    width: 25em;
+}
