@@ -37,6 +37,13 @@ $recipes = $recipesStatement->fetchAll();
 
     <a href="ajouter_ecole.php" class="btn btn-dark text-decoration-none text-white py-2 my-2 text-center"><i class="bi bi-plus-circle"></i> Ajouter une école</a>
 
+    <?php
+
+    if($_SESSION['role'] == 1){?>
+        <a href="creer_compte.php" class="btn btn-dark text-decoration-none- text-white py-2 my-2 text-center"><i class="bi bi-plus-circle"></i> Créer un compte</a>
+    <?php
+    }
+    ?>
 
     <div class="row">
         <div class="col-2">

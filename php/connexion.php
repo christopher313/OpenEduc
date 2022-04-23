@@ -85,7 +85,16 @@ require "navmenu.php";
             }
             //SINON
             else{
-                printf("Compte inexistant");
+                ?>
+                <div class="container">
+
+                    <div class="text-danger">
+                        <?php echo "Les identifiants que vous avez saisis (pseudo ou mot de passe) ne sont pas reconnus. Veuillez réesayer." ?>
+                    </div>
+
+                </div>
+
+                <?php
             }
         }
 

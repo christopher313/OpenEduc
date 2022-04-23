@@ -42,7 +42,7 @@ if(empty($_GET['search-bar']) || ($_GET['search-bar'] == " ")){
     
 
     <div class="resultats pt-3">
-        <h1>Resultats pour <?php echo $_GET['search-bar']?></h1>
+        <h1>Resultat(s) pour "<?php echo $_GET['search-bar']?>"</h1>
 
         <ul>
             <?php 

@@ -9,6 +9,7 @@ date_default_timezone_set('Europe/Paris');
 
 
 
+
 ?>
 
 
@@ -21,7 +22,7 @@ date_default_timezone_set('Europe/Paris');
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-1BmE4kWBq78iYhFldvKuhfTAU6auU8tT94WrHftjDbrCEXSU1oBoqyl2QvZ6jIW3" crossorigin="anonymous">
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.8.1/font/bootstrap-icons.css">
-    <link rel="stylesheet" href="style.css">
+    <link rel="stylesheet" href="../css/style.css">
     <link rel="icon" href="../img/open-t-n2.png" type="image/png">
 </head>
 <body>
@@ -57,7 +58,7 @@ date_default_timezone_set('Europe/Paris');
                 <a class="nav-link dropdown-toggle link-light text-uppercase" data-bs-toggle="dropdown" href="#" role="button" aria-expanded="false"><?php echo $_SESSION['user'] . " " ?><i class="bi bi-person-circle"></i></a>
                 <ul class="dropdown-menu">
                     <li><a class="dropdown-item" href="dashboard.php"><i class="bi bi-clipboard-data-fill"></i> Dashboard</a></li>
-                    <li><a class="dropdown-item" href="#"><i class="bi bi-gear-fill"></i> Paramètres du compte</a></li>
+                    <li><a class="dropdown-item" href="parametres.php?id=<?php echo $_SESSION['idUser'] ?>"><i class="bi bi-gear-fill"></i> Paramètres du compte</a></li>
                     <li><hr class="dropdown-divider"></li>
                     <li><a class="dropdown-item" href="deconnexion.php"><i class="bi bi-box-arrow-right"></i> Se déconnecter</a></li>
                 </ul>
@@ -68,7 +69,7 @@ date_default_timezone_set('Europe/Paris');
 
             else{?>
                 <li class="nav-item">
-                    <a class="nav-link link-light" href="connexion.php">CONNEXION</a>
+                    <a class="nav-link link-light" href="connexion.php">CONNEXION <i class="bi bi-box-arrow-in-right"></i></a>
                 </li><?php
             }?>
 

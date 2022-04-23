@@ -130,21 +130,21 @@ $recipes = $recipesStatement->fetchAll();
         
 
         <div class="col">
-            <a class="btn btn-dark" href="historique.php?id=<?php echo $ecoId ?>"><i class="bi bi-clock-history"></i> Historique des modifications</a>
+            <a class="btn btn-dark w-100" href="historique.php?id=<?php echo $ecoId ?>"><i class="bi bi-clock-history"></i> Historique des modifications</a>
         </div>
             
         <div class="col">
-            <a class="btn btn-dark" href="modification_ecole.php?id=<?php echo $ecoId ?>"><i class="bi bi-pencil-fill"></i> Modifier les informations de l'école</a>
+            <a class="btn btn-dark w-100" href="modification_ecole.php?id=<?php echo $ecoId ?>"><i class="bi bi-pencil-fill"></i> Modifier l'école</a>
         </div>
 
         <div class="col">
-            <a class="btn btn-dark" href="ajouter_classe.php?id=<?php echo $ecoId ?>"><i class="bi bi-plus-circle"></i> Ajouter une classe</a>
+            <a class="btn btn-dark w-100" href="ajouter_classe.php?id=<?php echo $ecoId ?>"><i class="bi bi-plus-circle"></i> Ajouter une classe</a>
         </div>
             
         <?php
             if($creatorId == $idSession){?>
             <div class="col">
-                <a class="btn btn-dark" href="droits.php?id=<?php echo $ecoId ?>"> <i class="bi bi-people-fill"></i> Gérer les droits</a>
+                <a class="btn btn-dark w-100" href="droits.php?id=<?php echo $ecoId ?>"> <i class="bi bi-people-fill"></i> Gérer les droits</a>
             </div>
                 <?php
             }?>
