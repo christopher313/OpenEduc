@@ -60,8 +60,19 @@ if($row_cnt>0){
                 <form action="ajouter_classe_traitement.php?id=<?php echo $ecoId?>" method="post" class="d-flex flex-column">
 
                     <div class="form-group py-1">
+                        <label for="annee" class="form-label">Choisir l'année scolaire</label>
+                        <select class="form-select" name="annee" id="annee" required>
+                            <option value="2021-2022">2021-2022</option>
+                            <option value="2020-2021">2020-2021</option>
+                            <option value="2019-2020">2019-2020</option>
+                            <option value="2018-2019">2018-2019</option>
+                            <option value="2017-2018">2017-2018</option>
+                        </select>
+                    </div>
+
+                    <div class="form-group py-1">
                         <label for="nameclasses">Choisir un niveau de classe:</label>
-                        <select class="form-control" name="classes">
+                        <select class="form-select" name="classes" required>
                             <option value="">--Choisisez un niveau--</option>
                             <option value="CP">CP</option>
                             <option value="CP/CE1">CP/CE1</option>
@@ -86,12 +97,12 @@ if($row_cnt>0){
 
                     <div class="form-group py-1">
                         <label for="nom_prof">Nom du professeur: </label>
-                        <input class="form-control" type="text" placeholder="Nom du professeur" id="nom_prof" name="nom_prof">
+                        <input class="form-control" type="text" placeholder="Nom du professeur" id="nom_prof" name="nom_prof" required>
                     </div>
 
                     <div class="form-group py-1">
                         <label for="effectif">Effectif: </label>
-                        <input type="number" class="form-control" placeholder="Effectif" id="effectif" name="effectif">
+                        <input type="number" class="form-control" placeholder="Effectif" id="effectif" name="effectif" required> 
                         <br>
                     </div>
 

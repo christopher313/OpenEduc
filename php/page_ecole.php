@@ -24,6 +24,7 @@ $sql = "SELECT * FROM `ecole` INNER JOIN `droits` ON droits.dr_ecoId=ecole.eco_i
 $recipesStatement = $db->prepare($sql);
 $recipesStatement->execute();
 $donnees = $recipesStatement->fetch(PDO::FETCH_ASSOC);
+$annee = "2021-2022";
 
 //VARIABLES
 $ref = $donnees['eco_ref'];
@@ -35,6 +36,11 @@ $ville = $donnees['eco_ville'];
 $eco_mail = $donnees['eco_mail'];
 $eco_tel = $donnees['eco_tel'];
 $eco_tel_decompose = "";
+
+if(isset($_GET['annee'])){
+    $annee = $_GET['annee'];
+}
+
 
 //Pour l'affichage du numéro de téléphone
 $delimiteur = 0;
@@ -81,7 +87,7 @@ for($i=0; $i<10; $i++){
 }
 
 //REQUETE SQL POUR RECUPERER LES DIFFERENTES CLASSES LIE A L'ECOLE
-$sql = "SELECT * FROM `classe` WHERE `cl_idEcole`='$ecoId'";
+$sql = "SELECT * FROM `classe` WHERE `cl_idEcole`='$ecoId' AND `cl_annee` = '$annee'";
 $recipesStatement = $db->prepare($sql);
 $recipesStatement->execute();
 $recipes = $recipesStatement->fetchAll();
@@ -97,6 +103,7 @@ $recipes = $recipesStatement->fetchAll();
     <meta charset="UTF-8">
     <link rel="stylesheet" href="../css/style.css">
     <title>OpenEduc - <?php echo $nomEcole ?></title>
+    <script src="../js/script.js"></script>
 </head>
 <body class="bg-light">
 
@@ -114,9 +121,24 @@ $recipes = $recipesStatement->fetchAll();
                 <p><strong>Email: </strong><a class="link-light" href="<?php echo 'mailto:' . $eco_mail ?>"><?php echo $eco_mail ?> </a></p>
             </div>
             <div class="col">
-                <p><strong>Année scolaire: </strong> 2021/22</p>
+                <p><strong>Année scolaire: </strong> <?php echo $annee ?></p>
                 <p><strong>Dernière mise à jour: </strong> 21-nov-21</p>
                 <p><strong>Administrateur: </strong><?php echo $creatorName?> </p>
+                
+                <form method="get" action="page_ecole.php">
+                    <input type="text" name="id" id="id" value="<?php echo $ecoId ?>" hidden>
+                    <select class="" name="annee" id="annee">
+                        <option value="<?php echo $annee?>"><?php echo $annee?></option>
+                        <option value="---------------">---------------</option>
+                        <option value="2021-2022">2021-2022</option>
+                        <option value="2020-2021">2020-2021</option>
+                        <option value="2019-2020">2019-2020</option>
+                        <option value="2018-2019">2018-2019</option>
+                        <option value="2017-2018">2017-2018</option>
+                    </select>
+                    <input type="submit" value="OK">
+                </form>
+
             </div>
         </div>
     </div>

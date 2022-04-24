@@ -10,6 +10,7 @@ if(isset($_POST['classes'])){
     $nomProf = $_POST['nom_prof'];
     $effectif = $_POST['effectif'];
     $civilite = $_POST['civilite'];
+    $annee = $_POST['annee'];
 
     if(isset($_SESSION['idUser'])){
         $idSession = $_SESSION['idUser'];
@@ -17,9 +18,9 @@ if(isset($_POST['classes'])){
     }
 
     //REQUETES SQL POUR AJOUTER LA CLASSE 
-    $sql = "INSERT INTO `classe`(`cl_nomProf`, `cl_idEcole`, `cl_idNiveau`, `cl_effectif`, `cl_civilite`) VALUES (:nomProf, :idEcole, :niveau, :effectif, :civilite)";
+    $sql = "INSERT INTO `classe`(`cl_nomProf`, `cl_idEcole`, `cl_idNiveau`, `cl_effectif`, `cl_civilite`, `cl_annee`) VALUES (:nomProf, :idEcole, :niveau, :effectif, :civilite, :annee)";
     $res = $db->prepare($sql);
-    $exec = $res->execute(array(":nomProf"=>$nomProf, ":idEcole"=>$ecoId, ":niveau"=>$niveau, ":effectif"=>$effectif, ":civilite"=>$civilite));
+    $exec = $res->execute(array(":nomProf"=>$nomProf, ":idEcole"=>$ecoId, ":niveau"=>$niveau, ":effectif"=>$effectif, ":civilite"=>$civilite, ":annee"=>$annee));
 
     // AJOUTER A l'HISTORIQUE
     $laDate = date('Y-m-d H:i:s');

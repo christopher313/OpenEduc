@@ -13,3 +13,12 @@ function checkPassword() {
         document.getElementById("text_mdp").innerHTML
     }
 }
+
+
+
+function checkSelect() {
+    console.log("a")
+    if (document.getElementById("id").value == "---------------") {
+        console.log("oulala");
+    }
+}
