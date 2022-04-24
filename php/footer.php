@@ -1,41 +1,23 @@
 <?php
 
-//BARRE DE NAVIGATION
 
-//INITIALISATION DE LA PAGE
-include("../php/database.php");
+
+
+
 
 ?>
 
+
+
 <!DOCTYPE html>
-<html>
+<html lang="fr">
 <head>
-<style>
-
-*{
-    margin:0;
-    padding: 0;
-    font-family: Arial, Helvetica, sans-serif;
-    scroll-behavior: smooth;
-}
-
-
-.container_footer{
-    background-color: black;
-    color: white;
-    width: 100%;
-    height: 100px;
-}
-
-</style>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
 </head>
 <body>
-
-<div class="container_footer">
-    <a>PIED DE PAGE</a>
-
-</div>
-
+    
 </body>
 </html>
-</header>
