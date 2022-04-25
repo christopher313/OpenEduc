@@ -64,5 +64,15 @@ require "navmenu.php";
 
     </div>
     
+    <footer>
+    
+    <?php
+
+    require 'footer.php'
+
+    ?>
+</footer>
+
+
 </body>
 </html>

@@ -80,7 +80,14 @@ if($row_cnt>0){
 
 
     
+<footer>
+    
+    <?php
 
+    require 'footer.php'
+
+    ?>
+</footer>
    
     
 

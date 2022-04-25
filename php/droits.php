@@ -120,7 +120,14 @@ if($donnees_droit2['dr_creatorId'] == $_SESSION['idUser']){
 
 
 
+    <footer>
+    
+    <?php
 
+    require 'footer.php'
+
+    ?>
+</footer>
 
         
 </body>

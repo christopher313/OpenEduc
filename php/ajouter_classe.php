@@ -121,6 +121,15 @@ if($row_cnt>0){
 
         
         </div>
+
+        <footer>
+    
+            <?php
+
+            require 'footer.php'
+
+            ?>
+        </footer>
  
     </body>
     </html>

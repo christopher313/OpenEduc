@@ -17,8 +17,11 @@ if(isset($idSession)){
     <html lang="FR">
     <head>
         <meta charset="UTF-8">
-        <link rel="stylesheet" href="../css/style.css">
+        <meta http-equiv="X-UA-Compatible" content="IE=edge">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
         <title>OpenEduc - Connexion </title>
+        <link rel="stylesheet" href="../css/style.css">
+        <script type="text/javascript" src="../js/script.js"></script>
     </head>
     <body>
 
@@ -70,8 +73,88 @@ if(isset($idSession)){
                             <input class="form-control" type="tel" placeholder="Numéro de téléphone" name="school_number" required>
                         </div>
 
-                        <label style="text-align: left; font-size: 0.8em; margin-bottom: 15px;">Les champs avec un astérique, sont des champs obligatoires.</label>
-                        <input class="btn btn-dark" type="submit" value="Ajouter" name="bouton_envoie">
+                        <div>
+                            <a class="btn btn-dark m-3 " id="btn-apea" value="Référent APEA" onClick="derouleDiv('apea')" >Ajouter référent APEA<a>
+                            <a class="btn btn-dark m-3 " id="btn-mairie" onClick="derouleDiv('mairie')" >Ajouter correspondant local Mairie<a>
+                        </div>
+
+                        
+                        
+                        <div id="apea" class="form-control my-3" hidden>
+                            <div class="form-group">    
+                                <h3>Référent APEA</h3>
+                                <label for="civiliteAPEA">Civilité</label>
+                                <br>
+                                <input type="radio" name="civiliteAPEA" value="Monsieur">
+                                <label for="Monsieur">Monsieur</label> 
+                                <input type="radio" name="civiliteAPEA" value="Madame"> 
+                                <label for="Madame">Madame</label>
+                            </div>
+
+                            <div class="form-group">
+                                <label for="pnomAPEA" class="form-label">Prénom: </label>
+                                <input class="form-control" type="text" placeholder="Prénom" name="pnomAPEA">
+                            </div>
+
+                            <div class="form-group">
+                                <label for="nomAPEA" class="form-label">Nom: </label>
+                                <input class="form-control" type="text" placeholder="Nom" name="nomAPEA">
+                            </div>
+
+                            <div class="form-group">
+                                <label for="mailAPEA" class="form-label">Email: </label>
+                                <input class="form-control" type="text" placeholder="Email" name="mailAPEA">
+                            </div>
+
+                        </div>
+                        
+
+
+                        <div class="form-control" id="mairie" hidden>
+
+
+                            <h3>Correspondant local mairie</h3>
+                            <div class="form-group">    
+                                <label for="civiliteCrs">Civilité</label>
+                                <br>
+                                <input type="radio" name="civiliteCrs" value="Monsieur">
+                                <label for="Monsieur">Monsieur</label> 
+                                <input type="radio" name="civiliteCrs" value="Madame"> 
+                                <label for="Madame">Madame</label>
+                            </div>
+
+                            <div class="form-group">
+                                <label for="pnomCrs" class="form-label">Prénom : </label>
+                                <input class="form-control" type="text" placeholder="Prénom" name="pnomCrs">
+                            </div>
+
+                            <div class="form-group">
+                                <label for="nomCrs" class="form-label">Nom : </label>
+                                <input class="form-control" type="text" placeholder="Nom" name="nomCrs">
+                            </div>
+
+                            <div class="form-group">
+                                <label for="mailCrs" class="form-label">Email : </label>
+                                <input class="form-control" type="text" placeholder="Email" name="mailCrs">
+                            </div>
+
+                            <div class="form-group">
+                                <label for="posteCrs" class="form-label">Poste : </label>
+                                <input class="form-control" type="text" placeholder="Poste" name="posteCrs">
+                            </div>
+
+                            <div class="form-group">
+                                <label for="telCrs" class="form-label">Tél : </label>
+                                <input class="form-control" type="text" placeholder="Téléphone" name="telCrs">
+                            </div>
+
+                        </div>
+
+                        <div class="form-group ">
+                            <input class="btn btn-dark w-100" type="submit" value="Ajouter" name="bouton_envoie">
+                        </div>
+
+                        
 
                 </form>
 
@@ -86,7 +169,14 @@ if(isset($idSession)){
 
     </div>
 
+    <footer>
     
+    <?php
+
+    require 'footer.php'
+
+    ?>
+</footer>
 
 
 

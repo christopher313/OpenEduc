@@ -85,7 +85,14 @@ if(empty($_GET['search-bar']) || ($_GET['search-bar'] == " ")){
 
     </div>
 
+    <footer>
+    
+    <?php
 
+    require 'footer.php'
+
+    ?>
+</footer>
     
 </body>
 </html>

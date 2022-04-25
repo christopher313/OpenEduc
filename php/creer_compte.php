@@ -55,6 +55,15 @@
 
             
         </div>
+
+        <footer>
+    
+    <?php
+
+    require 'footer.php'
+
+    ?>
+</footer>
         
         
         

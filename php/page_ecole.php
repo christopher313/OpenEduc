@@ -20,7 +20,8 @@ else{
 $ecoId = $_GET['id'];
 
 //REQUETE SQL POUR RECUPERER TOUTES LES INFOS DE L'ECOLE EN QUESTION PAR RAPPORT AU LIEN EN GET
-$sql = "SELECT * FROM `ecole` INNER JOIN `droits` ON droits.dr_ecoId=ecole.eco_id WHERE `eco_id`= '$ecoId'";
+
+$sql = "SELECT * FROM `ecole` INNER JOIN `droits` ON droits.dr_ecoId=ecole.eco_id LEFT JOIN correspondant_mairie ON correspondant_mairie.cm_idEcole=ecole.eco_id  LEFT JOIN correspondant_apea ON correspondant_apea.ca_ecoId=ecole.eco_id WHERE `eco_id`= $ecoId";
 $recipesStatement = $db->prepare($sql);
 $recipesStatement->execute();
 $donnees = $recipesStatement->fetch(PDO::FETCH_ASSOC);
@@ -36,6 +37,17 @@ $ville = $donnees['eco_ville'];
 $eco_mail = $donnees['eco_mail'];
 $eco_tel = $donnees['eco_tel'];
 $eco_tel_decompose = "";
+$civiliteAPEA = $donnees['ca_civilite'];
+$prenomAPEA = $donnees['ca_prenom'];
+$nomAPEA = $donnees["ca_nom"];
+$mailAPEA = $donnees['ca_mail'];
+
+$civiliteCrs = $donnees['cm_civilite'];
+$pnomCrs = $donnees['cm_prenom'];
+$nomCrs = $donnees['cm_nom'];
+$posteCrs = $donnees['cm_poste'];
+$telCrs = $donnees['cm_tel'];
+$mailCrs = $donnees['cm_mail'];
 
 if(isset($_GET['annee'])){
     $annee = $_GET['annee'];
@@ -71,6 +83,14 @@ $row_cnt = $recipesStatement3->rowCount();
 
 $creatorName = $donnees2['ct_username'];
 
+
+//REQUETE SQL POUR RECUPERE DATE DE DERNIERE MODIFCATION
+
+$sql4 =  "SELECT DATE_FORMAT(mdf_date, '%d/%m/%y à %k:%i:%s' ) as date FROM `modifications` WHERE `mdf_idEcole` = $ecoId ORDER BY mdf_date DESC LIMIT 1;";
+$recipesStatement4 = $db->prepare($sql4);
+$recipesStatement4->execute();
+$donnees4 = $recipesStatement4->fetch(PDO::FETCH_ASSOC);
+$dateModif = $donnees4['date'];
 
 
 
@@ -122,21 +142,21 @@ $recipes = $recipesStatement->fetchAll();
             </div>
             <div class="col">
                 <p><strong>Année scolaire: </strong> <?php echo $annee ?></p>
-                <p><strong>Dernière mise à jour: </strong> 21-nov-21</p>
+                <p><strong>Dernière mise à jour: </strong> <?php echo $dateModif ?></p>
                 <p><strong>Administrateur: </strong><?php echo $creatorName?> </p>
                 
-                <form method="get" action="page_ecole.php">
+                <form method="get" action="page_ecole.php" class="d-flex">
                     <input type="text" name="id" id="id" value="<?php echo $ecoId ?>" hidden>
-                    <select class="" name="annee" id="annee">
+                    <select class="form-select w-25 me-1" name="annee" id="annee">
                         <option value="<?php echo $annee?>"><?php echo $annee?></option>
-                        <option value="---------------">---------------</option>
+                        <option value="---------------" disabled>---------------</option>
                         <option value="2021-2022">2021-2022</option>
                         <option value="2020-2021">2020-2021</option>
                         <option value="2019-2020">2019-2020</option>
                         <option value="2018-2019">2018-2019</option>
                         <option value="2017-2018">2017-2018</option>
                     </select>
-                    <input type="submit" value="OK">
+                    <input type="submit" class="btn btn-light" value="OK">
                 </form>
 
             </div>
@@ -175,14 +195,84 @@ $recipes = $recipesStatement->fetchAll();
     }
     ?>
 
+        <!-- Referent APEA -->
+        <?php
+        if($nomAPEA == "" ){?>
+
+            
+
+        <?php
+        }
+        else{?>
+           <h2>Référent APEA</h2>
+            <div class="tableau ">
+                <table class="table text-center">
+
+                    <tr id="case-sombre">
+                        <td>Nom</td>
+                        <td>Mail</td>
+                    </tr>
+                    
+                    <tr>
+                        <td><?php echo $civiliteAPEA . " " . $prenomAPEA . " " . $nomAPEA ?></td>
+                        <td><a href="mailto:<?php echo $mailAPEA?>"><?php echo $mailAPEA ?></a></td>
+                    </tr>
+                <table>
+
+                <br>
+
+            </div>
+        <?php
+        }
+        ?>
+
+        <!-- Correspondant mairie -->
+
+        <?php
+        if(($pnomCrs == "") && ($nomCrs == "") ){?>
+
+            
+
+        <?php
+        }
+        else{?>
+           <h2>Correspondant Local Mairie</h2>
+            <div class="tableau ">
+                <table class="table text-center">
+
+                    <tr id="case-sombre">
+                        <td>Nom</td>
+                        <td>Poste</td>
+                        <td>Tel</td>
+                        <td>Email</td>
+                    </tr>
+                    
+                    <tr>
+                        <td><?php echo $civiliteCrs . " " . $pnomCrs . " " . $nomCrs ?></td>
+                        <td><?php echo $posteCrs ?></td>
+                        <td><?php echo $telCrs ?></td>
+                        <td><a href="mailto:<?php echo $mailCrs?>"><?php echo $mailCrs ?></a></td>
+                    </tr>
+                <table>
+
+                <br>
+
+            </div>
+        <?php
+        }
+        ?>
+
+
+        <h2>Tableau des effectifs</h2>
         <div class="tableau bg-dark ">
+            
 
             <table class=" table text-center">
                 <tr id="case-sombre">
                     <td>Niveau(x)</td>
                     <td>Professeur</td>
                     <td>Effectifs</td>
-                    <td></td>
+                    <td>&nbsp</td>
                 </tr>
 
                 <?php 
@@ -215,6 +305,7 @@ $recipes = $recipesStatement->fetchAll();
                     <td>&nbsp</td>
                     <td>Total effectif école</td>
                     <td id="case-exception"><?php echo $totalEffectif ?></td>
+                    <td>&nbsp</td>
                 </tr>
 
                 <tr id="case-demi-sombre">
@@ -228,7 +319,8 @@ $recipes = $recipesStatement->fetchAll();
                         $moyenneEffectif = 0 ;
                     }
                     ?>
-                    <td id="case-exception"><?php echo $moyenneEffectif ?></td>
+                    <td id="case-exception"><?php echo number_format($moyenneEffectif, 2) ?></td>
+                    <td>&nbsp</td>
                 </tr>
             </table> 
         
@@ -339,7 +431,14 @@ $recipes = $recipesStatement->fetchAll();
 
 
    
+    <footer>
+    
+    <?php
 
+    require 'footer.php'
+
+    ?>
+</footer>
 
 
 

@@ -89,7 +89,14 @@ $recipes = $recipesStatement->fetchAll();
 
 
 
+<footer>
+    
+    <?php
 
+    require 'footer.php'
+
+    ?>
+</footer>
 
 
 </body>

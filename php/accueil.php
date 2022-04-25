@@ -26,6 +26,8 @@ require "navmenu.php";
             <a href="about.php" class="text-decoration-none text-white btn btn-dark p-3">Découvrir plus</a>
         </div>
     </div>
+
+    
 </body>
 
 </html>

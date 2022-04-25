@@ -10,15 +10,23 @@ function checkPassword() {
     else {
         document.getElementById("btn").disabled = true;
         document.getElementById("div_mdp").hidden = false;
-        document.getElementById("text_mdp").innerHTML
+        document.getElementById("text_mdp").innerHTML;
     }
 }
 
 
 
-function checkSelect() {
-    console.log("a")
-    if (document.getElementById("id").value == "---------------") {
-        console.log("oulala");
+
+function derouleDiv(idDiv) {
+    if (document.getElementById(idDiv).hidden == true) {
+
+        document.getElementById(idDiv).hidden = false;
+        window.location.href = "ajouter_ecole.php#" + idDiv;
     }
+    else {
+        document.getElementById(idDiv).hidden = true;
+    }
+
 }
+
+

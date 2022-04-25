@@ -10,9 +10,6 @@ require "navmenu.php";
 //VARIABLES
 
 
-
-
-
 if(isset($_POST['school_name'])){
 
     $nom = strtoupper($_POST['school_name']);
@@ -24,6 +21,19 @@ if(isset($_POST['school_name'])){
     $tel = $_POST['school_number'];
     $idSession = $_SESSION['idUser'];
     $idCreateur = $idSession;
+    $pnomCrs = $_POST['pnomCrs'];
+    $nomCrs = $_POST['nomCrs'];
+    $mailCrs = $_POST['mailCrs'];
+    $posteCrs = $_POST['posteCrs'];
+    $telCrs = $_POST['telCrs'];
+    if(isset($_POST['civiliteCrs'])){
+        $civiliteCrs = $_POST['civiliteCrs'];
+    }
+    
+    $civiliteAPEA = $_POST['civiliteAPEA'];
+    $pnomAPEA = $_POST['pnomAPEA'];
+    $nomAPEA = $_POST['nomAPEA'];
+    $mailAPEA = $_POST['mailAPEA'];
 
     //REQUETE SQL POUR INSERER LES DONNEES DE L ECOLE 
     $sqlInsertEcole = "INSERT INTO `ecole`(`eco_nom`, `eco_ref`, `eco_adresse`, `eco_cp`, `eco_ville`, `eco_mail`, `eco_tel`) VALUES (:nom , :ref, :adresse, :cp, :ville, :mail, :tel) ";
@@ -45,6 +55,27 @@ if(isset($_POST['school_name'])){
         $sqlHistorique = "INSERT INTO `modifications`(`mdf_idEcole`, `mdf_idUser`, `mdf_date`, `mdf_type`) VALUES (:idEcole, :idUser, :laDate, :typeModif)";
         $res = $db->prepare($sqlHistorique);
         $exec = $res->execute(array(":idEcole"=>$last_id, ":idUser"=>$idSession, ":laDate"=>$laDate, ":typeModif"=>0));
+
+        //AJOUT DU CORRESPONDANT MAIRIE
+        if(($nomCrs == "") && ($pnomCrs == "")){
+            
+         }
+         else{
+            $sql2 =  "INSERT INTO `correspondant_mairie`(`cm_idEcole`, `cm_civilite`, `cm_prenom`, `cm_nom`, `cm_poste`, `cm_tel`, `cm_mail`) VALUES (:ecoId, :civiliteCrs, :pnomCrs, :nomCrs, :posteCrs, :telCrs, :mailCrs)";
+            $res2 = $db->prepare($sql2);
+            $exec2 = $res2->execute(array(":ecoId"=>$last_id, ":civiliteCrs"=>$civiliteCrs, ":pnomCrs"=>$pnomCrs, ":nomCrs"=>$nomCrs, ":posteCrs"=>$posteCrs, ":telCrs"=>$telCrs, ":mailCrs"=>$mailCrs));
+         }
+
+        //AJOUT DU CORRESPONDANT APEA
+        if(($nomAPEA == "") && ($pnomAPEA == "")){
+            
+        }
+        else{
+           $sql3 = "INSERT INTO `correspondant_apea`(`ca_ecoId`, `ca_civilite`, `ca_prenom`, `ca_nom`, `ca_mail`) VALUES (:ecoId,:civiliteAPEA, :pnomAPEA,:nomAPEA, :mailAPEA)";
+           $res3 = $db->prepare($sql3);
+           $exec3 = $res3->execute(array(":ecoId"=>$last_id, ":civiliteAPEA"=>$civiliteAPEA, ":pnomAPEA"=>$pnomAPEA, ":nomAPEA"=>$nomAPEA, ":mailAPEA"=>$mailAPEA));
+        }
+       
         
         //REDIRECTION
         header('location: dashboard.php');
