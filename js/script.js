@@ -17,14 +17,15 @@ function checkPassword() {
 
 
 
-function derouleDiv(idDiv) {
+function derouleDiv(idDiv, btnName, text1, text2) {
     if (document.getElementById(idDiv).hidden == true) {
-
         document.getElementById(idDiv).hidden = false;
         window.location.href = "ajouter_ecole.php#" + idDiv;
+        document.getElementById(btnName).innerHTML = text2;
     }
     else {
         document.getElementById(idDiv).hidden = true;
+        document.getElementById(btnName).innerHTML = text1;
     }
 
 }

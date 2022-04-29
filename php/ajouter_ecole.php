@@ -74,8 +74,8 @@ if(isset($idSession)){
                         </div>
 
                         <div>
-                            <a class="btn btn-dark m-3 " id="btn-apea" value="Référent APEA" onClick="derouleDiv('apea')" >Ajouter référent APEA<a>
-                            <a class="btn btn-dark m-3 " id="btn-mairie" onClick="derouleDiv('mairie')" >Ajouter correspondant local Mairie<a>
+                            <a class="btn btn-dark m-3 " id="btn-apea" value="Référent APEA" onClick="derouleDiv('apea', 'btn-apea','Ajouter référent APEA', 'Retirer référent APEA')" >Ajouter référent APEA<a>
+                            <a class="btn btn-dark m-3 " id="btn-mairie" onClick="derouleDiv('mairie', 'btn-mairie', 'Ajouter correspondant local mairie', 'Retirer correspondant local mairie')" >Ajouter correspondant local Mairie<a>
                         </div>
 
                         
